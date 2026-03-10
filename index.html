@@ -23,7 +23,7 @@
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         @media (max-height: 850px) {
             .setup-card { padding: 1.5rem 2.5rem !important; }
-            .big-character { font-size: 5rem !important; }
+            .big-character { font-size: 5.5rem !important; }
             .quiz-box { padding: 1rem 2.5rem !important; }
         }
     </style>
@@ -34,84 +34,81 @@
         <h1 class="text-xl md:text-2xl font-black text-slate-800 tracking-tighter">
             <span class="text-indigo-600">17 Mandarin：</span>TOCFL 詞彙大師
         </h1>
-        <div id="data-count" class="text-[10px] font-bold bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full uppercase">Loading...</div>
+        <div id="data-count" class="text-[10px] font-bold bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full uppercase">Loading Data...</div>
     </nav>
 
     <div class="container mx-auto p-2 md:p-4 max-w-6xl">
         <!-- Setup Section -->
         <section id="setup-section" class="bg-white p-10 rounded-[3.5rem] shadow-2xl border border-white mt-6 setup-card transition-all">
-            <!-- Step 1: Level -->
+            <!-- Step 1 -->
             <div class="mb-10">
                 <h2 class="text-xs font-black text-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">Step 1: Select Levels</h2>
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center">
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition group shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="1" checked><span class="text-xs font-black text-slate-700 leading-tight uppercase">第一級<br>(Pre A1)</span></label>
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="2"><span class="text-xs font-black text-slate-700 leading-tight uppercase">第二級<br>(A1)</span></label>
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="3"><span class="text-xs font-black text-slate-700 leading-tight uppercase">第三級<br>(A2)</span></label>
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="4"><span class="text-xs font-black text-slate-700 leading-tight uppercase">第四級<br>(B1)</span></label>
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="5"><span class="text-xs font-black text-slate-700 leading-tight uppercase">第五級<br>(B2)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition group"><input type="checkbox" class="level-checkbox w-6 h-6" value="1" checked><span class="text-xs font-black text-slate-700 uppercase leading-tight">第一級<br>(Pre A1)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition"><input type="checkbox" class="level-checkbox w-6 h-6" value="2"><span class="text-xs font-black text-slate-700 uppercase leading-tight">第二級<br>(A1)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition"><input type="checkbox" class="level-checkbox w-6 h-6" value="3"><span class="text-xs font-black text-slate-700 uppercase leading-tight">第三級<br>(A2)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition"><input type="checkbox" class="level-checkbox w-6 h-6" value="4"><span class="text-xs font-black text-slate-700 uppercase leading-tight">第四級<br>(B1)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition"><input type="checkbox" class="level-checkbox w-6 h-6" value="5"><span class="text-xs font-black text-slate-700 uppercase leading-tight">第五級<br>(B2)</span></label>
                 </div>
             </div>
 
-            <!-- Step 2: Topic -->
+            <!-- Step 2 -->
             <div class="mb-10">
                 <div class="flex justify-between items-end mb-4">
-                    <h2 class="text-xs font-black text-indigo-400 uppercase tracking-widest flex items-center gap-2">Step 2: Select Topics</h2>
+                    <h2 class="text-xs font-black text-indigo-400 uppercase tracking-widest">Step 2: Select Topics</h2>
                     <div class="flex gap-6"><button onclick="toggleAllTopics(true)" class="text-xs font-bold text-indigo-600 hover:underline uppercase">All</button><button onclick="toggleAllTopics(false)" class="text-xs font-bold text-slate-400 hover:underline uppercase">Clear</button></div>
                 </div>
-                <!-- 高度優化：一眼看到約 9-12 個主題 -->
-                <div id="topic-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 overflow-y-auto p-4 border-2 border-slate-50 rounded-[2.5rem] bg-slate-50/50 custom-scroll h-64 font-bold text-slate-600 shadow-inner">
-                    <p class="col-span-full text-center text-slate-300 py-10 italic">Data Parsing...</p>
-                </div>
+                <div id="topic-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 overflow-y-auto p-4 border-2 border-slate-50 rounded-[2.5rem] bg-slate-50/50 custom-scroll h-64 font-bold text-slate-600 shadow-inner"></div>
             </div>
 
-            <!-- Step 3: Mode -->
-            <div class="border-t border-slate-100 pt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <!-- Step 3 -->
+            <div class="border-t border-slate-100 pt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
                 <button onclick="startExercise('flashcard')" class="p-8 bg-white border-2 border-emerald-100 text-emerald-600 rounded-[2.5rem] hover:bg-emerald-500 hover:text-white transition shadow-md flex flex-col items-center group"><span class="text-5xl mb-2 group-hover:scale-110 transition duration-300">🎴</span><span class="font-black text-xl leading-tight">隨機字卡<br><span class="text-[10px] uppercase font-bold opacity-60">Flashcards</span></span></button>
-                <button onclick="startExercise('practice')" class="p-8 bg-white border-2 border-orange-100 text-orange-600 rounded-[2.5rem] hover:bg-orange-500 hover:text-white transition shadow-md flex flex-col items-center group"><span class="text-5xl mb-2 group-hover:scale-110 transition duration-300">🔍</span><span class="font-black text-xl leading-tight">認字練習<br><span class="text-[10px] uppercase font-bold opacity-60">Character Recognition</span></span></button>
-                <button onclick="startExercise('game')" class="p-8 bg-white border-2 border-indigo-100 text-indigo-600 rounded-[2.5rem] hover:bg-indigo-500 hover:text-white transition shadow-md flex flex-col items-center group"><span class="text-5xl mb-2 group-hover:scale-110 transition duration-300">🧩</span><span class="font-black text-xl leading-tight uppercase">Matching Game</span></button>
+                <button onclick="startExercise('practice')" class="p-8 bg-white border-2 border-orange-100 text-orange-600 rounded-[2.5rem] hover:bg-orange-500 hover:text-white transition shadow-md flex flex-col items-center group"><span class="text-5xl mb-2 group-hover:scale-110 transition duration-300">🔍</span><span class="font-black text-xl leading-tight text-center">認字練習<br><span class="text-[10px] uppercase font-bold opacity-60">Character Recognition</span></span></button>
+                <button onclick="startExercise('game')" class="p-8 bg-white border-2 border-indigo-100 text-indigo-600 rounded-[2.5rem] hover:bg-indigo-500 hover:text-white transition shadow-md flex flex-col items-center group"><span class="text-5xl mb-2 group-hover:scale-110 transition duration-300">🧩</span><span class="font-black text-xl leading-tight text-center">記憶遊戲<br><span class="text-[10px] uppercase font-bold opacity-60">Matching Game</span></span></button>
                 
                 <div class="p-8 bg-rose-50 border-2 border-rose-100 rounded-[2.5rem] shadow-xl md:col-span-3 flex flex-col md:flex-row items-center justify-between gap-6 relative">
-                    <div class="flex items-center gap-4"><span class="text-5xl">🏆</span><div class="text-left font-black text-rose-600 text-2xl leading-none">考試模式<div class="text-[10px] text-rose-400 uppercase font-black mt-2">Exam Mode with Full Report</div></div></div>
+                    <div class="flex items-center gap-4"><span class="text-5xl">🏆</span><div class="text-left font-black text-rose-600 text-2xl leading-none">考試模式<div class="text-[10px] text-rose-400 uppercase font-black mt-2">Exam Mode with Report</div></div></div>
                     <div class="flex flex-col items-center gap-2">
-                        <div class="flex gap-4"><input type="number" id="exam-count" value="10" min="1" class="w-24 p-4 bg-white border-2 border-rose-200 rounded-2xl text-center font-black text-2xl text-rose-600 outline-none"><button onclick="startExercise('exam')" class="px-12 py-4 bg-rose-500 text-white rounded-2xl font-black text-xl hover:bg-rose-600 transition shadow-lg uppercase tracking-widest">Start</button></div>
+                        <div class="flex gap-4"><input type="number" id="exam-count" value="10" min="1" class="w-24 p-4 bg-white border-2 border-rose-200 rounded-2xl text-center font-black text-2xl text-rose-600 shadow-inner outline-none"><button onclick="startExercise('exam')" class="px-12 py-4 bg-rose-500 text-white rounded-2xl font-black text-xl hover:bg-rose-600 transition shadow-lg uppercase">Start</button></div>
                         <p class="text-[10px] text-rose-400 font-bold italic">*Hint: Customize the number of questions above.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Workspace Section -->
+        <!-- Workspace -->
         <section id="exercise-section" class="hidden mt-2">
             <div class="flex justify-between items-center mb-4 bg-white/95 backdrop-blur p-4 rounded-[2rem] shadow-sm border border-white sticky top-16 z-40">
-                <div class="flex items-center gap-8">
+                <div class="flex items-center gap-8 w-full justify-between">
                     <div class="flex flex-col ml-2 leading-none">
                         <span id="progress-text" class="font-black text-indigo-600 text-2xl tracking-tighter tabular-nums">0 / 0</span>
                         <span id="current-topic-label" class="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-1">Topic</span>
                     </div>
-                    <div id="game-countdown-wrapper" class="hidden flex items-center gap-3 bg-rose-50 border-2 border-rose-100 px-6 py-2 rounded-2xl shadow-inner">
+                    <div id="game-countdown-wrapper" class="hidden flex items-center gap-3 bg-rose-50 border-2 border-rose-100 px-6 py-2 rounded-2xl">
                         <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span id="game-timer-display" class="font-black text-2xl tabular-nums tracking-tighter text-rose-600">00:00</span>
                     </div>
+                    <button onclick="exitExercise()" class="bg-rose-50 text-rose-600 px-5 py-2 rounded-2xl font-black text-xs hover:bg-rose-600 hover:text-white transition border border-rose-100 uppercase tracking-tighter">✕ Exit</button>
                 </div>
-                <button onclick="exitExercise()" class="bg-rose-50 text-rose-600 px-5 py-2 rounded-2xl font-black text-xs hover:bg-rose-600 hover:text-white transition border border-rose-100 shadow-sm uppercase tracking-tighter">✕ Exit</button>
             </div>
 
             <!-- Quiz Sub-mode Select -->
             <div id="quiz-mode-setup" class="hidden bg-white p-10 rounded-[3rem] shadow-2xl max-w-2xl mx-auto text-center animate-in fade-in duration-500">
-                <h2 class="text-3xl font-black mb-8 uppercase text-slate-800 tracking-tighter">認字練習 模式選擇</h2>
+                <h2 class="text-3xl font-black mb-8 uppercase text-slate-800 tracking-tighter">模式選擇 Mode Select</h2>
                 <div class="grid gap-6 text-left">
-                    <button onclick="launchQuiz('normal')" class="p-8 bg-emerald-50 border-4 border-emerald-100 rounded-[2.5rem] hover:border-emerald-500 transition-all group">
+                    <button onclick="launchQuiz('normal')" class="p-8 bg-emerald-50 border-4 border-emerald-100 rounded-[2.5rem] hover:border-emerald-500 transition-all group shadow-sm">
                         <div class="font-black text-2xl text-emerald-600 uppercase">1. 普通模式 (Normal)</div>
                         <div class="text-xs text-emerald-400 font-bold mt-1 tracking-widest uppercase">Unlimited questions for daily practice.</div>
                     </button>
-                    <div class="p-10 bg-rose-50 border-4 border-rose-100 rounded-[2.5rem]">
+                    <div class="p-10 bg-rose-50 border-4 border-rose-100 rounded-[2.5rem] shadow-sm">
                         <div class="font-black text-2xl text-rose-600 uppercase">2. 遊戲大戰 (Battle Game)</div>
-                        <div class="text-xs text-rose-400 font-bold mt-1 mb-6 uppercase tracking-widest">Defeat the Demon! Correct answers deal damage.</div>
+                        <div class="text-xs text-rose-400 font-bold mt-1 mb-6 uppercase tracking-widest">Correct answers deal damage to the demon!</div>
                         <div class="flex gap-4">
                             <select id="battle-count-select" class="flex-1 p-3 bg-white border-2 border-rose-200 rounded-xl font-black text-xl text-rose-600">
                                 <option value="5">5 Qs</option><option value="10" selected>10 Qs</option><option value="15">15 Qs</option><option value="20">20 Qs</option><option value="30">30 Qs</option><option value="50">50 Qs</option>
                             </select>
-                            <button onclick="launchQuiz('battle')" class="bg-rose-500 text-white px-10 rounded-xl font-black text-xl hover:bg-rose-600 shadow-lg">START</button>
+                            <button onclick="launchQuiz('battle')" class="bg-rose-500 text-white px-10 rounded-xl font-black text-xl hover:bg-rose-600 shadow-lg transition active:scale-95">START</button>
                         </div>
                     </div>
                 </div>
@@ -129,6 +126,7 @@
                 </div>
             </div>
 
+            <!-- Interaction Areas -->
             <div id="flashcard-container" class="hidden flex flex-col items-center py-2 animate-in zoom-in duration-300">
                 <div class="w-full max-w-md h-80 cursor-pointer relative" onclick="flipCard()"><div id="card-inner" class="card-inner w-full h-full shadow-2xl rounded-[4rem] bg-white border-8 border-white text-slate-800"><div class="card-front flex items-center justify-center big-character bg-white rounded-[3.1rem] px-4 text-center" id="f-front"></div><div class="card-back flex flex-col items-center justify-center p-10 bg-indigo-600 text-white rounded-[3.1rem] text-center shadow-inner"><div id="f-pinyin" class="font-black mb-4 pinyin-font text-center leading-tight"></div><div class="w-24 h-1.5 bg-white/20 mb-6 rounded-full"></div><div id="f-english" class="font-bold text-indigo-50 min-h-[4rem] px-4 leading-snug italic text-2xl"></div><div id="f-topic" class="text-[11px] mt-6 bg-white/20 text-white px-4 py-1.5 rounded-full font-black uppercase tracking-widest italic opacity-80"></div></div></div></div>
                 <div class="flex gap-8 mt-10"><button onclick="prevQuestion()" id="prev-btn" class="bg-white text-slate-400 w-16 h-16 rounded-full shadow-xl border flex items-center justify-center hover:text-indigo-600 transition transform active:scale-90"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 19l-7-7 7-7"></path></svg></button><button onclick="nextQuestion()" id="next-btn-main" class="bg-indigo-600 text-white px-16 py-5 rounded-[2.5rem] shadow-2xl shadow-indigo-200 hover:bg-indigo-700 active:scale-95 transition-all font-black text-2xl uppercase tracking-tighter">Next →</button></div>
@@ -138,294 +136,42 @@
                 <div id="quiz-question-text" class="text-center big-character mb-10 px-4"></div>
                 <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
                 <div id="quiz-feedback" class="mt-8 text-center h-10 font-black text-3xl transition-all min-h-[2.5rem]"></div>
-                <div class="flex justify-center mt-10"><button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-indigo-600 text-white px-20 py-5 rounded-[2.5rem] shadow-xl hover:bg-indigo-700 font-black text-2xl uppercase shadow-indigo-100">NEXT →</button></div>
+                <div class="flex justify-center mt-10"><button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-indigo-600 text-white px-20 py-5 rounded-[2.5rem] shadow-xl hover:bg-indigo-700 font-black text-2xl uppercase tracking-tighter shadow-indigo-100">NEXT →</button></div>
             </div>
 
             <div id="game-view" class="hidden">
-                <div id="game-setup-ui" class="bg-white p-10 rounded-[4rem] border border-white shadow-2xl max-w-2xl mx-auto text-center animate-in fade-in duration-500 mt-4"><h2 class="text-3xl font-black text-slate-800 mb-8 uppercase tracking-tighter leading-none">記憶遊戲 Matching</h2><div class="space-y-10 text-left mb-10"><div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-3 block">Match Mode</label><div class="grid grid-cols-2 gap-4 text-center font-black"><button onclick="setGameMode('pinyin', this)" class="mode-btn p-4 bg-white border-4 border-indigo-600 text-indigo-600 rounded-3xl transition-all shadow-sm">漢字 + Pinyin</button><button onclick="setGameMode('english', this)" class="mode-btn p-4 bg-white border-4 border-slate-100 text-slate-400 rounded-3xl transition-all shadow-sm">漢字 + English</button></div></div><div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-3 block text-center">Card Count</label><div class="grid grid-cols-5 gap-2 font-black text-center"><button onclick="setGameCards(12, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500 font-mono">12</button><button onclick="setGameCards(16, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500 font-mono">16</button><button onclick="setGameCards(20, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500 font-mono">20</button><button onclick="setGameCards(24, this)" class="count-btn p-3 border-2 border-indigo-600 rounded-2xl transition bg-indigo-50 text-indigo-600 font-mono shadow-inner">24</button><button onclick="setGameCards(30, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500 font-mono">30</button></div></div><div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-4 block leading-none flex items-center gap-2 tracking-widest"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Set Timer</label><div class="flex gap-4 items-center bg-slate-50 p-6 rounded-[2.5rem] border-2 border-slate-100 font-black text-indigo-600"><input type="checkbox" id="timer-check" class="w-8 h-8 text-indigo-600 rounded-xl cursor-pointer"><div class="flex-1 flex gap-3"><select id="t-min" class="flex-1 p-3 bg-white border-2 border-slate-200 rounded-xl outline-none"><option value="0">0m</option><option value="1" selected>1m</option><option value="2">2m</option><option value="3">3m</option></select><select id="t-sec" class="flex-1 p-3 bg-white border-2 border-slate-200 rounded-xl outline-none"><option value="0">00s</option><option value="15">15s</option><option value="30">30s</option><option value="45">45s</option></select></div></div></div></div><button onclick="launchGame()" class="w-full bg-indigo-600 text-white py-6 rounded-[2.5rem] font-black text-3xl hover:bg-indigo-700 transition shadow-2xl uppercase tracking-widest">Start Game</button></div><div id="game-board-container" class="hidden animate-in zoom-in duration-500"><div id="game-board" class="grid mx-auto gap-2 md:gap-3 p-2"></div></div>
+                <div id="game-setup-ui" class="bg-white p-10 rounded-[4rem] border border-white shadow-2xl max-w-2xl mx-auto text-center animate-in fade-in duration-500 mt-4">
+                    <h2 class="text-3xl font-black text-slate-800 mb-8 uppercase tracking-tighter leading-none">記憶遊戲 Matching</h2>
+                    <div class="space-y-10 text-left mb-10">
+                        <div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-3 block">Match Mode</label><div class="grid grid-cols-2 gap-4 text-center font-black"><button onclick="setGameMode('pinyin', this)" class="mode-btn p-4 bg-white border-4 border-indigo-600 text-indigo-600 rounded-3xl transition-all shadow-sm">漢字 + Pinyin</button><button onclick="setGameMode('english', this)" class="mode-btn p-4 bg-white border-4 border-slate-100 text-slate-400 rounded-3xl transition-all shadow-sm">漢字 + English</button></div></div>
+                        <div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-3 block text-center">Card Count</label><div class="grid grid-cols-5 gap-2 font-black text-center"><button onclick="setGameCards(12, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">12</button><button onclick="setGameCards(16, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">16</button><button onclick="setGameCards(20, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">20</button><button onclick="setGameCards(24, this)" class="count-btn p-3 border-2 border-indigo-600 rounded-2xl transition bg-indigo-50 text-indigo-600 shadow-inner">24</button><button onclick="setGameCards(30, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">30</button></div></div>
+                        <div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-4 block leading-none flex items-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> Set Timer</label><div class="flex gap-4 items-center bg-slate-50 p-6 rounded-[2.5rem] border-2 border-slate-100 font-black text-indigo-600"><input type="checkbox" id="timer-check" class="w-8 h-8 text-indigo-600 rounded-xl cursor-pointer shadow-sm"><div class="flex-1 flex gap-3 font-black text-indigo-600 tracking-tighter"><select id="t-min" class="flex-1 p-3 bg-white border-2 border-slate-200 rounded-xl outline-none"><option value="0">0m</option><option value="1" selected>1m</option><option value="2">2m</option><option value="3">3m</option></select><select id="t-sec" class="flex-1 p-3 bg-white border-2 border-slate-200 rounded-xl outline-none"><option value="0">00s</option><option value="15">15s</option><option value="30">30s</option><option value="45">45s</option></select></div></div></div>
+                    </div>
+                    <button onclick="launchGame()" class="w-full bg-indigo-600 text-white py-6 rounded-[2.5rem] font-black text-3xl hover:bg-indigo-700 transition shadow-2xl uppercase tracking-widest">Start Game</button>
+                </div>
+                <div id="game-board-container" class="hidden animate-in zoom-in duration-500"><div id="game-board" class="grid mx-auto gap-2 md:gap-3 p-2"></div></div>
             </div>
         </section>
 
         <!-- Final Report View -->
-        <section id="report-section" class="hidden bg-white p-12 rounded-[4rem] shadow-2xl mt-4 border border-white max-w-5xl mx-auto text-center animate-in slide-in-from-bottom duration-500">
-            <h2 id="report-header" class="text-xs font-black text-slate-300 uppercase tracking-widest mb-4 italic">Performance Report</h2>
+        <section id="report-section" class="hidden bg-white p-12 rounded-[4rem] shadow-2xl mt-4 border border-white max-w-5xl mx-auto text-center">
+            <h2 id="report-header" class="text-xs font-black text-slate-300 uppercase tracking-widest mb-4 italic">Performance Summary</h2>
             <div id="score-summary" class="text-9xl font-black text-indigo-600 mb-10 tracking-tighter italic leading-none">Done!</div>
             <div class="overflow-y-auto max-h-[50vh] border rounded-3xl custom-scroll mb-8 shadow-inner">
-                <table class="w-full text-left bg-slate-50/30">
-                    <thead class="bg-indigo-600 text-white sticky top-0 font-bold text-sm uppercase">
-                        <tr><th class="p-4 rounded-tl-2xl">Word</th><th class="p-4 text-center">Pinyin</th><th class="p-4">Meaning</th><th class="p-4 rounded-tr-2xl text-center">Result</th></tr>
+                <table class="w-full text-left bg-slate-50/30 font-bold">
+                    <thead class="bg-indigo-600 text-white sticky top-0 text-sm uppercase">
+                        <tr><th class="p-4 rounded-tl-2xl">Word</th><th class="p-4">Pinyin</th><th class="p-4">Meaning</th><th class="p-4 rounded-tr-2xl text-center">Result</th></tr>
                     </thead>
-                    <tbody id="report-tbody" class="divide-y divide-slate-100 text-slate-700 font-bold text-lg"></tbody>
+                    <tbody id="report-tbody" class="divide-y divide-slate-100 text-slate-700"></tbody>
                 </table>
             </div>
             <button onclick="exitExercise()" class="w-full bg-slate-900 text-white py-6 rounded-[2.5rem] font-black text-2xl hover:bg-indigo-600 transition shadow-2xl uppercase tracking-widest">Back to Home</button>
         </section>
     </div>
 
-    <script>
-        // --- 核心變數 ---
-        let vocabulary = []; let currentPool = []; let currentIndex = 0; let examResults = []; let gameSelectedWords = [];
-        let currentMode = ''; let quizSubMode = ''; let matchesFound = 0; let gameInterval = null; 
-        let gameModeSelection = 'pinyin'; let gameCardsCount = 24; let firstCard = null; let secondCard = null; let lockBoard = false;
-        let playerHP = 100; let bossHP = 100;
-
-        const topicDict = { "核心詞": "核心詞 Core", "餐飲、烹飪": "餐飲、烹飪 Dining", "教育、學習": "教育、學習 Education", "職業": "職業 Career", "個人資料": "個人資料 Personal", "社交、人際": "社交、人際 Social", "身體、醫療": "身體、醫療 Health", "日常起居": "日常起居 Daily Life", "交通、旅遊": "交通、旅遊 Travel", "休閒、娛樂": "休閒、娛樂 Leisure", "自然環境": "自然環境 Nature", "購物、商店": "購物、商店 Shopping", "公共服務": "公共服務 Public Service", "安全": "安全 Safety", "社會": "社會 Society", "文化": "文化 Culture", "科技": "科技 Technology", "情緒、態度": "情緒、態度 Emotions", "數位科技": "數位科技 Digital" };
-
-        function applyScaling(text, element, type, target) {
-            const len = text.length;
-            if (type === 'word') {
-                if (target === 'game') {
-                    if (len <= 2) element.style.fontSize = "3rem";
-                    else if (len <= 4) element.style.fontSize = "1.8rem";
-                    else element.style.fontSize = "1.1rem";
-                } else {
-                    if (len <= 2) element.style.fontSize = "9rem";
-                    else if (len <= 4) element.style.fontSize = "5.5rem";
-                    else element.style.fontSize = "2.8rem";
-                }
-            } else {
-                if (target === 'game') {
-                    if (len <= 8) element.style.fontSize = "1.5rem";
-                    else if (len <= 15) element.style.fontSize = "0.9rem";
-                    else element.style.fontSize = "0.75rem";
-                } else {
-                    if (len <= 10) element.style.fontSize = "5.5rem";
-                    else if (len <= 20) element.style.fontSize = "3.2rem";
-                    else element.style.fontSize = "2.2rem";
-                }
-            }
-        }
-
-        // --- Data Logic ---
-        function parseData(raw) {
-            const lines = raw.trim().split(/\r?\n/).filter(l => l.trim() !== "");
-            if (lines.length < 2) return;
-            const headers = lines[0].toLowerCase().split(/\t/).map(h => h.trim());
-            
-            // 重要：動態搜尋標頭位置
-            const wIdx = headers.findIndex(h => h.includes('word') || h.includes('漢字'));
-            const pIdx = headers.findIndex(h => h.includes('pinyin') || h.includes('拼音'));
-            const lIdx = headers.findIndex(h => h.includes('level') || h.includes('等級'));
-            const sIdx = headers.findIndex(h => h.includes('situation') || h.includes('topic') || h.includes('主題'));
-            const eIdx = headers.findIndex(h => h.includes('english') || h.includes('trans') || h.includes('英文'));
-
-            vocabulary = lines.slice(1).map(line => {
-                const cols = line.split('\t');
-                let sit = (cols[sIdx] || "核心詞").trim();
-                if (sit.toLowerCase() === 'core' || sit === "核心詞") sit = "核心詞";
-                return { 
-                    word: (cols[wIdx] || "").trim(), 
-                    pinyin: (cols[pIdx] || "").trim(), 
-                    level: (cols[lIdx] || "1").trim(), 
-                    situation: sit, 
-                    english: (eIdx !== -1) ? (cols[eIdx] || "").trim() : "" 
-                };
-            }).filter(v => v.word && v.pinyin);
-
-            document.getElementById('data-count').textContent = `${vocabulary.length} Words Ready`;
-            renderTopicList();
-        }
-
-        function renderTopicList() {
-            const container = document.getElementById('topic-container');
-            const uniqueSits = [...new Set(vocabulary.map(v => v.situation))].sort();
-            container.innerHTML = uniqueSits.map(s => `<label class="flex items-center space-x-3 p-4 border-2 border-white rounded-2xl hover:bg-white cursor-pointer transition bg-white/70 group shadow-sm"><input type="checkbox" class="topic-checkbox w-6 h-6 text-indigo-600 rounded" value="${s}" checked><span class="group-hover:text-indigo-600 font-bold text-sm text-slate-600 leading-tight">${topicDict[s] || s}</span></label>`).join("");
-        }
-
-        function toggleAllTopics(checked) { document.querySelectorAll('.topic-checkbox').forEach(cb => cb.checked = checked); }
-
-        // --- Start Control ---
-        function startExercise(mode) {
-            const selectedLv = Array.from(document.querySelectorAll('.level-checkbox:checked')).map(cb => cb.value);
-            const selectedSit = Array.from(document.querySelectorAll('.topic-checkbox:checked')).map(cb => cb.value);
-            if(!vocabulary.length) return alert("Please hardcode data into scripts at bottom!");
-            if(!selectedLv.length || !selectedSit.length) return alert("Select Level & Topic.");
-            
-            currentPool = vocabulary.filter(v => selectedLv.includes(v.level.toString()) && selectedSit.includes(v.situation));
-            if (!currentPool.length) return alert("No words found.");
-
-            currentMode = mode; currentIndex = 0; examResults = []; matchesFound = 0;
-            resetTimer(); 
-            document.getElementById('setup-section').classList.add('hidden');
-            document.getElementById('exercise-section').classList.remove('hidden');
-            
-            ['game-view', 'flashcard-container', 'quiz-container', 'quiz-mode-setup', 'battle-ui'].forEach(id => document.getElementById(id).classList.add('hidden'));
-
-            if (mode === 'game') {
-                document.getElementById('game-view').classList.remove('hidden');
-                document.getElementById('game-setup-ui').classList.remove('hidden');
-            } else if (mode === 'practice') {
-                document.getElementById('quiz-mode-setup').classList.remove('hidden');
-            } else {
-                if (mode === 'exam') currentPool = [...currentPool].sort(()=>Math.random()-0.5).slice(0, parseInt(document.getElementById('exam-count').value));
-                renderCurrent();
-            }
-        }
-
-        function launchQuiz(sub) {
-            quizSubMode = sub;
-            document.getElementById('quiz-mode-setup').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            if(sub === 'battle') {
-                const count = parseInt(document.getElementById('battle-count-select').value);
-                currentPool = [...currentPool].sort(()=>Math.random()-0.5).slice(0, count);
-                bossHP = 100; playerHP = 100; updateHP();
-                document.getElementById('battle-ui').classList.remove('hidden');
-            }
-            renderCurrent();
-        }
-
-        function updateHP() {
-            document.getElementById('boss-hp').style.width = `${bossHP}%`;
-            document.getElementById('boss-hp-val').textContent = `${Math.ceil(bossHP)}%`;
-            document.getElementById('player-hp').style.width = `${playerHP}%`;
-            document.getElementById('player-hp-val').textContent = `${Math.ceil(playerHP)}%`;
-        }
-
-        // --- Render UI ---
-        function renderCurrent() {
-            const item = currentPool[currentIndex];
-            document.getElementById('progress-text').textContent = `${currentIndex + 1} / ${currentPool.length}`;
-            const flash = document.getElementById('flashcard-container'), quiz = document.getElementById('quiz-container'), fb = document.getElementById('quiz-feedback');
-            fb.textContent = ""; // 解決 Incorrect 殘留問題
-            document.getElementById('prev-btn').style.visibility = (currentIndex === 0) ? 'hidden' : 'visible';
-
-            if (currentMode === 'flashcard') {
-                flash.classList.remove('hidden'); document.getElementById('card-inner').classList.remove('flipped');
-                const front = document.querySelector('#flashcard-container .card-front'); front.textContent = item.word; applyScaling(item.word, front, 'word', 'main');
-                const bP = document.getElementById('card-pinyin-back'); bP.textContent = item.pinyin; applyScaling(item.pinyin, bP, 'pinyin', 'main');
-                document.getElementById('card-english-back').textContent = item.english || "";
-                document.getElementById('card-topic-tag').textContent = item.situation;
-                document.getElementById('current-topic-label').textContent = `Topic: ${item.situation}`;
-                document.getElementById('next-btn-main').textContent = (currentIndex === currentPool.length - 1) ? "REPORT" : "NEXT →";
-                document.getElementById('next-btn-main').classList.remove('hidden');
-            } else {
-                quiz.classList.remove('hidden'); document.getElementById('current-topic-label').textContent = `Topic: ${item.situation}`;
-                setupQuizMode(item);
-            }
-        }
-
-        function setupQuizMode(item) {
-            const qT = document.getElementById('quiz-question-text'), o = document.getElementById('quiz-options');
-            qT.textContent = item.word; applyScaling(item.word, qT, 'word', 'main'); o.innerHTML = "";
-            document.getElementById('quiz-next-btn').classList.add('hidden');
-            
-            const isTone = Math.random() > 0.5;
-            let opts = new Set([item.pinyin]);
-            let safety = 0;
-            if (isTone) { while(opts.size < 4 && safety < 50) { opts.add(generateToneVariation(item.pinyin)); safety++; } }
-            while(opts.size < 4 && safety < 100) {
-                const randW = vocabulary[Math.floor(Math.random()*vocabulary.length)].pinyin;
-                if(randW !== item.pinyin) opts.add(randW);
-                safety++;
-            }
-
-            Array.from(opts).sort(()=>Math.random()-0.5).forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = "option-btn w-full p-5 border-4 border-slate-100 rounded-[2.5rem] hover:border-indigo-400 bg-slate-50 text-2xl font-black text-left px-10 transition-all pinyin-font";
-                btn.textContent = opt;
-                btn.onclick = () => {
-                    const isCorrect = (opt === item.pinyin);
-                    document.querySelectorAll('.option-btn').forEach(b => { b.disabled = true; if(b.textContent === item.pinyin) b.className = "w-full p-5 border-4 border-emerald-500 bg-emerald-50 rounded-[2.5rem] text-2xl font-black text-left px-10 mb-1 shadow-inner"; else if(b.textContent === opt) b.className = "w-full p-5 border-4 border-rose-500 bg-rose-50 rounded-[2.5rem] text-2xl font-black text-left px-10 mb-1 shadow-inner"; else b.style.opacity = "0.1"; });
-                    
-                    examResults.push({word: item.word, pinyin: item.pinyin, english: item.english, user: opt, res: isCorrect});
-
-                    if (quizSubMode === 'battle') {
-                        const dmg = 100 / currentPool.length;
-                        if (isCorrect) { bossHP -= dmg; document.getElementById('boss-unit').classList.add('hit-effect'); setTimeout(()=>document.getElementById('boss-unit').classList.remove('hit-effect'), 300); }
-                        else { playerHP -= dmg; document.getElementById('player-unit').classList.add('hit-effect'); setTimeout(()=>document.getElementById('player-unit').classList.remove('hit-effect'), 300); }
-                        updateHP(); setTimeout(nextQuestion, 700);
-                    } else if(currentMode === 'exam') { setTimeout(nextQuestion, 700); } 
-                    else { if(isCorrect) setTimeout(nextQuestion, 700); else { document.getElementById('quiz-feedback').textContent = "✕ INCORRECT"; document.getElementById('quiz-feedback').className = "mt-8 text-center h-10 font-black text-3xl text-rose-500"; document.getElementById('quiz-next-btn').classList.remove('hidden'); } }
-                };
-                o.appendChild(btn);
-            });
-        }
-
-        function generateToneVariation(p) {
-            const tones = {'a':['ā','á','ǎ','à'],'e':['ē','é','ě','è'],'i':['ī','í','ǐ','ì'],'o':['ō','ó','ǒ','ò'],'u':['ū','ú','ǔ','ù'],'ü':['ǖ','ǘ','ǚ','ǜ']};
-            const allToned = "āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ";
-            let c = [...p];
-            for(let i=0; i<c.length; i++) { if(allToned.includes(c[i])) { for(let b in tones) { if(tones[b].includes(c[i])) { c[i] = tones[b][Math.floor(Math.random()*4)]; return c.join(""); } } } }
-            return p;
-        }
-
-        // --- Helpers ---
-        function nextQuestion() { 
-            if (currentIndex < currentPool.length - 1) { currentIndex++; renderCurrent(); } 
-            else { 
-                if(currentMode === 'practice' && quizSubMode === 'normal') { currentIndex = 0; currentPool.sort(()=>Math.random()-0.5); renderCurrent(); }
-                else if (currentMode === 'game') showGameReview(); else showReport(); 
-            } 
-        }
-        function prevQuestion() { if (currentIndex > 0) { currentIndex--; renderCurrent(); } }
-        function resetTimer() { clearInterval(gameInterval); document.getElementById('game-countdown-wrapper').classList.add('hidden'); document.getElementById('game-timer-display').classList.remove('timer-critical'); }
-        function exitExercise() { resetTimer(); document.getElementById('game-board').innerHTML = ""; document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.add('hidden'); document.getElementById('setup-section').classList.remove('hidden'); window.scrollTo(0,0); }
-        function flipCard() { document.getElementById('card-inner').classList.toggle('flipped'); }
-
-        function showReport() {
-            resetTimer(); document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.remove('hidden');
-            const score = examResults.length ? Math.round(examResults.filter(r => r.res).length / examResults.length * 100) : 100;
-            document.getElementById('score-summary').textContent = (quizSubMode === 'battle' && bossHP < 5) ? "VICTORY!" : `${score}%`;
-            document.getElementById('report-tbody').innerHTML = examResults.map(r => `<tr><td class="p-5 text-4xl font-black">${r.word}</td><td class="p-5 text-emerald-500 font-bold pinyin-font text-xl text-center">${r.pinyin}</td><td class="p-5 italic text-slate-500 text-sm">${r.english}</td><td class="p-5 text-center text-3xl">${r.res?'✅':'❌'}</td></tr>`).join("");
-        }
-
-        function showGameReview() {
-            resetTimer(); document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.remove('hidden');
-            document.getElementById('score-summary').textContent = "REVIEW";
-            document.getElementById('report-tbody').innerHTML = gameSelectedWords.map(r => `<tr><td class="p-5 text-4xl font-black">${r.word}</td><td class="p-5 text-emerald-500 font-bold pinyin-font text-xl text-center">${r.pinyin}</td><td class="p-5 italic text-slate-500 text-sm">${r.english}</td><td class="p-5 text-center text-3xl">🎯</td></tr>`).join("");
-        }
-
-        // --- Memory Game Logic ---
-        function setGameMode(m, btn) { gameModeSelection = m; document.querySelectorAll('.mode-btn').forEach(b => b.className = "mode-btn p-4 bg-white border-4 border-slate-100 text-slate-400 rounded-3xl font-black shadow-sm"); btn.className = "mode-btn p-4 bg-white border-4 border-indigo-600 text-indigo-600 rounded-3xl font-black shadow-md"; }
-        function setGameCards(c, btn) { gameCardsCount = c; document.querySelectorAll('.count-btn').forEach(b => b.className = "count-btn p-3 border-2 border-slate-100 rounded-2xl font-black transition text-slate-500 bg-slate-50"); btn.className = "count-btn p-3 border-2 border-indigo-600 rounded-2xl font-black transition bg-indigo-50 text-indigo-600 shadow-inner"; }
-        function launchGame() {
-            const pairs = gameCardsCount / 2;
-            gameSelectedWords = [...currentPool].sort(() => Math.random() - 0.5).slice(0, pairs);
-            let items = []; gameSelectedWords.forEach((w, i) => { items.push({ id: i, content: w.word, type: 'word' }); items.push({ id: i, content: (gameModeSelection === 'pinyin' ? w.pinyin : w.english || "?"), type: 'target' }); });
-            items.sort(() => Math.random() - 0.5);
-            document.getElementById('game-setup-ui').classList.add('hidden');
-            const board = document.getElementById('game-board'); document.getElementById('game-board-container').classList.remove('hidden');
-            board.innerHTML = ""; const colsMap = { 12: 'grid-cols-4', 16: 'grid-cols-4', 20: 'grid-cols-5', 24: 'grid-cols-6', 30: 'grid-cols-6' };
-            board.className = `grid ${colsMap[gameCardsCount]} gap-2 md:gap-3 mx-auto`;
-            items.forEach(item => {
-                const card = document.createElement('div'); card.className = "memory-card h-28 md:h-40";
-                const inner = document.createElement('div'); inner.className = "card-inner w-full h-full relative"; inner.dataset.id = item.id;
-                const front = document.createElement('div'); front.className = "card-front bg-indigo-500 border-4 border-white flex items-center justify-center text-white font-black text-3xl shadow-lg"; front.textContent = "?";
-                const back = document.createElement('div'); back.className = "card-back bg-white border-4 border-indigo-200 flex items-center justify-center p-2 text-center font-black text-slate-800 pinyin-font shadow-xl"; back.textContent = item.content;
-                applyScaling(item.content, back, item.type === 'word' ? 'word' : 'target', 'game');
-                inner.appendChild(front); inner.appendChild(back); card.appendChild(inner); card.onclick = () => flipMemoryCard(inner); board.appendChild(card);
-            });
-            if (document.getElementById('timer-check').checked) {
-                let totalSecs = (parseInt(document.getElementById('t-min').value) * 60) + parseInt(document.getElementById('t-sec').value);
-                const wrapper = document.getElementById('game-countdown-wrapper'), display = document.getElementById('game-timer-display');
-                wrapper.classList.remove('hidden');
-                gameInterval = setInterval(() => {
-                    display.textContent = `${Math.floor(totalSecs/60)}:${(totalSecs%60).toString().padStart(2,'0')}`;
-                    if(totalSecs <= 10) display.classList.add('timer-critical');
-                    if(totalSecs <= 0) { showGameReview(); }
-                    totalSecs--;
-                }, 1000);
-            }
-            document.getElementById('progress-text').textContent = `Matches: 0 / ${pairs}`;
-        }
-        function flipMemoryCard(card) {
-            if (lockBoard || card === firstCard || card.parentElement.classList.contains('matched')) return;
-            card.classList.add('flipped');
-            if (!firstCard) { firstCard = card; return; }
-            secondCard = card; lockBoard = true;
-            if (firstCard.dataset.id === secondCard.dataset.id) {
-                matchesFound++; document.getElementById('progress-text').textContent = `Matched: ${matchesFound} / ${gameCardsCount/2}`;
-                setTimeout(() => { firstCard.parentElement.classList.add('matched'); secondCard.parentElement.classList.add('matched'); [firstCard, secondCard, lockBoard] = [null, null, false]; if (matchesFound === gameCardsCount/2) { showGameReview(); } }, 500);
-            } else { setTimeout(() => { firstCard.classList.remove('flipped'); secondCard.classList.remove('flipped'); [firstCard, secondCard, lockBoard] = [null, null, false]; }, 900); }
-        }
-
-        window.onload = () => { parseData(myDataString); };
-    </script>
-
-    <!-- 數據貼上區 -->
-    <script>
-        const myDataString = `id	word	english	pinyin	level	band	situation
+    <!-- Hidden Data Storage -->
+    <pre id="raw-data-store" class="hidden">
+id	word	english	pinyin	level	band	situation
 1	愛	to love; love	ài	1	A	核心詞
 2	吧	(sentence particle; indicates suggestion)	ba	1	A	核心詞
 3	八	eight	bā	1	A	核心詞
@@ -5764,7 +5510,253 @@
 5336	作弊	to cheat (in exams/games)	zuò bì	5	B	教育、學習
 5337	作客/做客	to be a guest	zuò kè	5	B	社交、人際
 5338	作為	as; action; conduct; achievement	zuò wéi	5	B	核心詞
-5339	作用	effect; function	zuò yòng	5	B	身體、醫療;
+5339	作用	effect; function	zuò yòng	5	B	身體、醫療
+    </pre>
+
+    <script>
+        // --- 核心變數 ---
+        let vocabulary = []; let currentPool = []; let currentIndex = 0; let examResults = []; let gameSelectedWords = [];
+        let currentMode = ''; let quizSubMode = ''; let matchesFound = 0; let gameInterval = null; 
+        let gameModeSelection = 'pinyin'; let gameCardsCount = 24; let firstCard = null; let secondCard = null; let lockBoard = false;
+        let playerHP = 100; let bossHP = 100;
+
+        const topicMapDict = { "核心詞": "核心詞 Core", "餐飲、烹飪": "餐飲、烹飪 Dining", "教育、學習": "教育、學習 Education", "職業": "職業 Career", "個人資料": "個人資料 Personal", "社交、人際": "社交、人際 Social", "身體、醫療": "身體、醫療 Health", "日常起居": "日常起居 Daily Life", "交通、旅遊": "交通、旅遊 Travel", "休閒、娛樂": "休閒、娛樂 Leisure", "自然環境": "自然環境 Nature", "購物、商店": "購物、商店 Shopping", "公共服務": "公共服務 Public Service", "安全": "安全 Safety", "社會": "社會 Society", "文化": "文化 Culture", "科技": "科技 Technology", "情緒、態度": "情緒、態度 Emotions", "數位科技": "數位科技 Digital" };
+
+        function applyScaling(text, element, type, target) {
+            const len = text.length;
+            if (type === 'word') {
+                if (target === 'game') {
+                    if (len <= 2) element.style.fontSize = "3rem";
+                    else if (len <= 4) element.style.fontSize = "1.8rem";
+                    else element.style.fontSize = "1rem";
+                } else {
+                    if (len <= 2) element.style.fontSize = "9rem";
+                    else if (len <= 4) element.style.fontSize = "5.5rem";
+                    else element.style.fontSize = "2.8rem";
+                }
+            } else {
+                if (target === 'game') {
+                    if (len <= 8) element.style.fontSize = "1.5rem";
+                    else if (len <= 15) element.style.fontSize = "0.9rem";
+                    else element.style.fontSize = "0.75rem";
+                } else {
+                    if (len <= 10) element.style.fontSize = "5.5rem";
+                    else if (len <= 20) element.style.fontSize = "3.2rem";
+                    else element.style.fontSize = "2.2rem";
+                }
+            }
+        }
+
+        // --- Data Processor (Improved) ---
+        function parseData() {
+            const raw = document.getElementById('raw-data-store').innerText.trim();
+            const lines = raw.split(/\r?\n/).filter(l => l.trim() !== "");
+            if (lines.length < 2) return;
+
+            const headers = lines[0].toLowerCase().split(/\t/).map(h => h.trim());
+            const wIdx = headers.indexOf('word'), pIdx = headers.indexOf('pinyin'), lIdx = headers.indexOf('level'), sIdx = headers.indexOf('situation'), eIdx = headers.findIndex(h => h.includes('english') || h.includes('trans'));
+
+            vocabulary = lines.slice(1).map(line => {
+                const cols = line.split('\t');
+                let sit = (cols[sIdx === -1 ? 5 : sIdx] || "核心詞").trim();
+                if (sit.toLowerCase() === 'core' || sit === "核心詞") sit = "核心詞";
+                return { 
+                    word: (cols[wIdx === -1 ? 1 : wIdx] || "").trim(), 
+                    pinyin: (cols[pIdx === -1 ? 2 : pIdx] || "").trim(), 
+                    level: (cols[lIdx === -1 ? 3 : lIdx] || "1").trim(), 
+                    situation: sit, 
+                    english: eIdx !== -1 ? (cols[eIdx] || "").trim() : "" 
+                };
+            }).filter(v => v.word && v.pinyin);
+
+            document.getElementById('data-count').textContent = `${vocabulary.length} Words Ready`;
+            renderTopicList();
+        }
+
+        function renderTopicList() {
+            const container = document.getElementById('topic-container');
+            const uniqueSits = [...new Set(vocabulary.map(v => v.situation))].sort();
+            container.innerHTML = uniqueSits.map(s => `<label class="flex items-center space-x-3 p-4 border-2 border-white rounded-2xl hover:bg-white cursor-pointer transition bg-white/70 group shadow-sm"><input type="checkbox" class="topic-checkbox w-6 h-6 text-indigo-600 rounded" value="${s}" checked><span class="group-hover:text-indigo-600 font-bold text-sm text-slate-600 leading-tight tracking-tighter">${topicMapDict[s] || s}</span></label>`).join("");
+        }
+
+        function toggleAllTopics(checked) { document.querySelectorAll('.topic-checkbox').forEach(cb => cb.checked = checked); }
+
+        function startExercise(mode) {
+            const selectedLv = Array.from(document.querySelectorAll('.level-checkbox:checked')).map(cb => cb.value);
+            const selectedSit = Array.from(document.querySelectorAll('.topic-checkbox:checked')).map(cb => cb.value);
+            if(!selectedLv.length || !selectedSit.length) return alert("Select Level & Topic.");
+            currentPool = vocabulary.filter(v => selectedLv.includes(v.level.toString()) && selectedSit.includes(v.situation));
+            if (!currentPool.length) return alert("No words found.");
+
+            currentMode = mode; currentIndex = 0; examResults = []; matchesFound = 0;
+            resetTimer(); 
+            document.getElementById('setup-section').classList.add('hidden');
+            document.getElementById('exercise-section').classList.remove('hidden');
+            
+            ['game-view', 'flashcard-container', 'quiz-container', 'quiz-mode-setup', 'battle-ui'].forEach(id => document.getElementById(id).classList.add('hidden'));
+
+            if (mode === 'game') {
+                document.getElementById('game-view').classList.remove('hidden');
+                document.getElementById('game-setup-ui').classList.remove('hidden');
+            } else if (mode === 'practice') {
+                document.getElementById('quiz-mode-setup').classList.remove('hidden');
+            } else {
+                if (mode === 'exam') currentPool = [...currentPool].sort(()=>Math.random()-0.5).slice(0, parseInt(document.getElementById('exam-count').value));
+                renderCurrent();
+            }
+        }
+
+        function launchQuiz(sub) {
+            quizSubMode = sub;
+            document.getElementById('quiz-mode-setup').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            if(sub === 'battle') {
+                const count = parseInt(document.getElementById('battle-count-select').value);
+                currentPool = [...currentPool].sort(()=>Math.random()-0.5).slice(0, count);
+                bossHP = 100; playerHP = 100; updateHP();
+                document.getElementById('battle-ui').classList.remove('hidden');
+            }
+            renderCurrent();
+        }
+
+        function updateHP() {
+            document.getElementById('boss-hp').style.width = `${bossHP}%`;
+            document.getElementById('boss-hp-val').textContent = `${Math.ceil(bossHP)}%`;
+            document.getElementById('player-hp').style.width = `${playerHP}%`;
+            document.getElementById('player-hp-val').textContent = `${Math.ceil(playerHP)}%`;
+        }
+
+        function renderCurrent() {
+            const item = currentPool[currentIndex];
+            document.getElementById('progress-text').textContent = `${currentIndex + 1} / ${currentPool.length}`;
+            const flash = document.getElementById('flashcard-container'), quiz = document.getElementById('quiz-container'), feedback = document.getElementById('quiz-feedback');
+            flash.classList.add('hidden'); quiz.classList.add('hidden'); feedback.textContent = ""; 
+            document.getElementById('prev-btn').style.visibility = (currentIndex === 0) ? 'hidden' : 'visible';
+
+            if (currentMode === 'flashcard') {
+                flash.classList.remove('hidden'); document.getElementById('card-inner').classList.remove('flipped');
+                const front = document.getElementById('f-front'); front.textContent = item.word; applyScaling(item.word, front, 'word', 'main');
+                const bP = document.getElementById('f-pinyin'); bP.textContent = item.pinyin; applyScaling(item.pinyin, bP, 'pinyin', 'main');
+                document.getElementById('f-english').textContent = item.english || "";
+                document.getElementById('f-topic').textContent = item.situation;
+                document.getElementById('current-topic-label').textContent = `Topic: ${item.situation}`;
+                document.getElementById('next-btn-main').textContent = (currentIndex === currentPool.length - 1) ? "REPORT" : "NEXT →";
+                document.getElementById('next-btn-main').classList.remove('hidden');
+            } else {
+                quiz.classList.remove('hidden'); document.getElementById('current-topic-label').textContent = `Topic: ${item.situation}`;
+                setupQuizMode(item);
+            }
+        }
+
+        function setupQuizMode(item) {
+            const qT = document.getElementById('quiz-question-text'), o = document.getElementById('quiz-options');
+            qT.textContent = item.word; applyScaling(item.word, qT, 'word', 'main'); o.innerHTML = "";
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+            
+            const isTone = Math.random() > 0.5;
+            let opts = new Set([item.pinyin]);
+            let safety = 0;
+            if (isTone) { while(opts.size < 4 && safety < 100) { opts.add(generateTone(item.pinyin)); safety++; } }
+            while(opts.size < 4 && safety < 150) {
+                const r = vocabulary[Math.floor(Math.random()*vocabulary.length)].pinyin;
+                if(r !== item.pinyin) opts.add(r);
+                safety++;
+            }
+
+            Array.from(opts).sort(()=>Math.random()-0.5).forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = "option-btn w-full p-5 border-4 border-slate-100 rounded-[2.5rem] hover:border-indigo-400 bg-slate-50 text-2xl font-black text-left px-10 transition-all pinyin-font";
+                btn.textContent = opt;
+                btn.onclick = () => {
+                    const isCorrect = (opt === item.pinyin);
+                    document.querySelectorAll('.option-btn').forEach(b => { b.disabled = true; if(b.textContent === item.pinyin) b.className = "w-full p-5 border-4 border-emerald-500 bg-emerald-50 rounded-[2.5rem] text-2xl font-black text-left px-10 shadow-inner"; else if(b.textContent === opt) b.className = "w-full p-5 border-4 border-rose-500 bg-rose-50 rounded-[2.5rem] text-2xl font-black text-left px-10 shadow-inner"; else b.style.opacity = "0.2"; });
+                    
+                    examResults.push({word: item.word, pinyin: item.pinyin, english: item.english, user: opt, res: isCorrect});
+
+                    if (quizSubMode === 'battle') {
+                        const dmg = 100 / currentPool.length;
+                        if (isCorrect) { bossHP -= dmg; document.getElementById('boss-unit').classList.add('hit-effect'); setTimeout(()=>document.getElementById('boss-unit').classList.remove('hit-effect'), 300); }
+                        else { playerHP -= dmg; document.getElementById('player-unit').classList.add('hit-effect'); setTimeout(()=>document.getElementById('player-unit').classList.remove('hit-effect'), 300); }
+                        updateHP(); setTimeout(nextQuestion, 750);
+                    } else if(currentMode === 'exam') { setTimeout(nextQuestion, 750); } 
+                    else { if(isCorrect) setTimeout(nextQuestion, 750); else { document.getElementById('quiz-feedback').textContent = "✕ INCORRECT"; document.getElementById('quiz-feedback').className = "mt-8 text-center h-10 font-black text-3xl text-rose-500"; document.getElementById('quiz-next-btn').classList.remove('hidden'); } }
+                };
+                o.appendChild(btn);
+            });
+        }
+
+        function generateTone(p) {
+            const tones = {'a':['ā','á','ǎ','à'],'e':['ē','é','ě','è'],'i':['ī','í','ǐ','ì'],'o':['ō','ó','ǒ','ò'],'u':['ū','ú','ǔ','ù'],'ü':['ǖ','ǘ','ǚ','ǜ']};
+            const allToned = "āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ";
+            let c = [...p];
+            for(let i=0; i<c.length; i++) { if(allToned.includes(c[i])) { for(let b in tones) { if(tones[b].includes(c[i])) { c[i] = tones[b][Math.floor(Math.random()*4)]; return c.join(""); } } } }
+            return p;
+        }
+
+        function nextQuestion() { if (currentIndex < currentPool.length - 1) { currentIndex++; renderCurrent(); } else { if(currentMode==='flashcard') showGameReview(currentPool); else showReport(); } }
+        function prevQuestion() { if (currentIndex > 0) { currentIndex--; renderCurrent(); } }
+        function resetTimer() { clearInterval(gameInterval); document.getElementById('game-countdown-wrapper').classList.add('hidden'); document.getElementById('game-timer-display').classList.remove('timer-critical'); }
+        function flipCard() { document.getElementById('card-inner').classList.toggle('flipped'); }
+        function exitExercise() { resetTimer(); document.getElementById('game-board').innerHTML = ""; document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.add('hidden'); document.getElementById('setup-section').classList.remove('hidden'); window.scrollTo(0,0); }
+
+        function showReport() {
+            resetTimer(); document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.remove('hidden');
+            const score = examResults.length ? Math.round(examResults.filter(r => r.res).length / examResults.length * 100) : 100;
+            document.getElementById('score-summary').textContent = (quizSubMode === 'battle' && bossHP < 5) ? "VICTORY!" : `${score}%`;
+            document.getElementById('report-tbody').innerHTML = examResults.map(r => `<tr><td class="p-5 text-4xl font-black">${r.word}</td><td class="p-5 text-emerald-600 font-black pinyin-font text-xl text-center">${r.pinyin}</td><td class="p-5 italic text-slate-500 text-sm">${r.english}</td><td class="p-5 text-center text-3xl">${r.res?'✅':'❌'}</td></tr>`).join("");
+        }
+
+        function showGameReview(pool) {
+            resetTimer(); document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.remove('hidden');
+            document.getElementById('score-summary').textContent = "REVIEW";
+            const data = pool || gameSelectedWords;
+            document.getElementById('report-tbody').innerHTML = data.map(r => `<tr><td class="p-5 text-4xl font-black">${r.word}</td><td class="p-5 text-emerald-600 font-bold pinyin-font text-xl text-center">${r.pinyin}</td><td class="p-5 italic text-slate-500 text-sm">${r.english}</td><td class="p-5 text-center text-3xl">🎯</td></tr>`).join("");
+        }
+
+        // --- Memory Game UI Logic ---
+        function setGameMode(m, btn) { gameModeSelection = m; document.querySelectorAll('.mode-btn').forEach(b => b.className = "mode-btn p-4 bg-white border-4 border-slate-100 text-slate-400 rounded-3xl font-black transition-all"); btn.className = "mode-btn p-4 bg-white border-4 border-indigo-600 text-indigo-600 rounded-3xl font-black shadow-md"; }
+        function setGameCards(c, btn) { gameCardsCount = c; document.querySelectorAll('.count-btn').forEach(b => b.className = "count-btn p-3 border-2 border-slate-100 rounded-2xl font-black transition text-slate-500 bg-slate-50"); btn.className = "count-btn p-3 border-2 border-indigo-600 rounded-2xl font-black transition bg-indigo-50 text-indigo-600 shadow-inner"; }
+        function launchGame() {
+            const pairs = gameCardsCount / 2; gameSelectedWords = [...currentPool].sort(() => Math.random() - 0.5).slice(0, pairs);
+            let items = []; gameSelectedWords.forEach((w, i) => { items.push({ id: i, content: w.word, type: 'word' }); items.push({ id: i, content: (gameModeSelection === 'pinyin' ? w.pinyin : w.english || "?"), type: 'target' }); });
+            items.sort(() => Math.random() - 0.5);
+            document.getElementById('game-setup-ui').classList.add('hidden');
+            const board = document.getElementById('game-board'); document.getElementById('game-board-container').classList.remove('hidden');
+            board.innerHTML = ""; const colsMap = { 12: 'grid-cols-4', 16: 'grid-cols-4', 20: 'grid-cols-5', 24: 'grid-cols-6', 30: 'grid-cols-6' };
+            board.className = `grid ${colsMap[gameCardsCount]} gap-2 md:gap-3 mx-auto`;
+            items.forEach(item => {
+                const card = document.createElement('div'); card.className = "memory-card h-28 md:h-40";
+                const inner = document.createElement('div'); inner.className = "card-inner w-full h-full relative"; inner.dataset.id = item.id;
+                const front = document.createElement('div'); front.className = "card-front bg-indigo-500 border-4 border-white flex items-center justify-center text-white font-black text-3xl shadow-lg"; front.textContent = "?";
+                const back = document.createElement('div'); back.className = "card-back bg-white border-4 border-indigo-200 flex items-center justify-center p-2 text-center font-black text-slate-800 pinyin-font shadow-xl"; back.textContent = item.content;
+                applyScaling(item.content, back, item.type === 'word' ? 'word' : 'target', 'game');
+                inner.appendChild(front); inner.appendChild(back); card.appendChild(inner); card.onclick = () => flipMemoryCard(inner); board.appendChild(card);
+            });
+            if (document.getElementById('timer-check').checked) {
+                let totalSecs = (parseInt(document.getElementById('t-min').value) * 60) + parseInt(document.getElementById('t-sec').value);
+                const wrapper = document.getElementById('game-countdown-wrapper'), display = document.getElementById('game-timer-display');
+                wrapper.classList.remove('hidden');
+                gameInterval = setInterval(() => {
+                    display.textContent = `${Math.floor(totalSecs/60)}:${(totalSecs%60).toString().padStart(2,'0')}`;
+                    if(totalSecs <= 10) display.classList.add('timer-critical');
+                    if(totalSecs <= 0) { showGameReview(gameSelectedWords); }
+                    totalSecs--;
+                }, 1000);
+            }
+            document.getElementById('progress-text').textContent = `Matched: 0 / ${pairs}`;
+        }
+        function flipMemoryCard(card) {
+            if (lockBoard || card === firstCard || card.parentElement.classList.contains('matched')) return;
+            card.classList.add('flipped');
+            if (!firstCard) { firstCard = card; return; }
+            secondCard = card; lockBoard = true;
+            if (firstCard.dataset.id === secondCard.dataset.id) {
+                matchesFound++; document.getElementById('progress-text').textContent = `Matched: ${matchesFound} / ${gameCardsCount/2}`;
+                setTimeout(() => { firstCard.parentElement.classList.add('matched'); secondCard.parentElement.classList.add('matched'); [firstCard, secondCard, lockBoard] = [null, null, false]; if (matchesFound === gameCardsCount/2) { showGameReview(gameSelectedWords); } }, 500);
+            } else { setTimeout(() => { firstCard.classList.remove('flipped'); secondCard.classList.remove('flipped'); [firstCard, secondCard, lockBoard] = [null, null, false]; }, 900); }
+        }
+
+        window.onload = () => { parseData(); };
     </script>
 </body>
 </html>
