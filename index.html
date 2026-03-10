@@ -16,38 +16,43 @@
         .card-back { transform: rotateY(180deg); }
         .memory-card { perspective: 1000px; width: 100%; height: 100%; }
         .matched { visibility: hidden; opacity: 0; transition: all 0.4s ease; transform: scale(0.8); }
+        .hp-bar { transition: width 0.5s ease-in-out; }
+        .hit-effect { animation: shake 0.2s ease-in-out; }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
         .custom-scroll::-webkit-scrollbar { width: 8px; }
         .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
-        .hit-effect { animation: shake 0.2s ease-in-out; }
-        .hp-bar { transition: width 0.5s ease-in-out; }
         @media (max-height: 850px) {
-            .big-character { font-size: 5rem !important; }
-            .setup-card { padding: 1.5rem 2.5rem !important; margin-top: 0.5rem !important; }
-            .topic-area-height { height: 12.5rem !important; } 
+            .setup-card { padding: 1.5rem 2.5rem !important; }
+            .big-character { font-size: 5.5rem !important; }
+            .quiz-box { padding: 1.5rem 2.5rem !important; }
         }
     </style>
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen pb-10">
 
-    <nav class="bg-white border-b border-indigo-100 p-4 sticky top-0 z-50 shadow-sm flex justify-between items-center px-6">
+    <nav class="bg-white border-b border-indigo-100 p-4 shadow-sm sticky top-0 z-50 flex justify-between items-center px-6">
         <h1 class="text-xl md:text-2xl font-black text-slate-800 tracking-tighter">
             <span class="text-indigo-600">17 Mandarin：</span>TOCFL 詞彙大師
         </h1>
         <div class="flex items-center gap-4">
             <div id="data-count" class="text-[10px] font-bold bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full uppercase">No Data</div>
-            <button onclick="toggleModal(true)" class="text-slate-400 hover:text-indigo-600 p-1"><svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></button>
+            <button onclick="toggleModal(true)" class="text-slate-400 hover:text-indigo-600 p-1" title="Settings">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </button>
         </div>
     </nav>
 
     <!-- Settings Modal -->
     <div id="settings-modal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 z-[100]">
         <div class="bg-white w-full max-w-3xl rounded-[2.5rem] shadow-2xl overflow-hidden p-8 animate-in zoom-in duration-300">
-            <h2 class="text-2xl font-black mb-4">Paste Word Bank (TSV)</h2>
-            <textarea id="tsv-input" class="w-full h-80 p-6 bg-slate-50 border-2 rounded-3xl font-mono text-xs outline-none resize-none" placeholder="word	pinyin	level	situation	english..."></textarea>
-            <div class="mt-6 flex justify-end gap-4">
-                <button onclick="toggleModal(false)" class="px-6 py-3 font-bold text-slate-400 uppercase">Cancel</button>
-                <button onclick="saveAndLoadData()" class="bg-indigo-600 text-white px-10 py-3 rounded-2xl font-black hover:bg-indigo-700 transition shadow-lg">Confirm & Load</button>
+            <h2 class="text-2xl font-black mb-4 tracking-tight">Paste Your Word Bank (TSV)</h2>
+            <textarea id="tsv-input" class="w-full h-80 p-6 bg-slate-50 border-2 rounded-3xl font-mono text-xs outline-none focus:border-indigo-400 resize-none custom-scroll" placeholder="word	pinyin	level	situation	english..."></textarea>
+            <div class="mt-6 flex justify-between items-center">
+                <p class="text-[10px] text-slate-400 font-bold uppercase">Columns: word, pinyin, level, situation, english</p>
+                <div class="flex gap-4">
+                    <button onclick="toggleModal(false)" class="px-6 py-2 font-bold text-slate-400">Cancel</button>
+                    <button onclick="saveAndLoadData()" class="bg-indigo-600 text-white px-10 py-3 rounded-2xl font-black hover:bg-indigo-700 transition">Confirm & Load</button>
+                </div>
             </div>
         </div>
     </div>
@@ -55,38 +60,35 @@
     <div class="container mx-auto p-2 md:p-4 max-w-6xl">
         <!-- Setup Section -->
         <section id="setup-section" class="bg-white p-10 rounded-[3.5rem] shadow-2xl border border-white mt-6 setup-card">
-            <!-- Step 1: Levels -->
-            <div class="mb-10">
+            <div class="mb-8">
                 <h2 class="text-xs font-black text-indigo-400 uppercase tracking-widest mb-4">Step 1: Select Levels</h2>
                 <div class="grid grid-cols-2 md:grid-cols-5 gap-3 text-center">
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition group"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="1" checked><span class="text-xs font-black text-slate-700 uppercase">第一級<br>(Pre A1)</span></label>
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="2"><span class="text-xs font-black text-slate-700 uppercase">第二級<br>(A1)</span></label>
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="3"><span class="text-xs font-black text-slate-700 uppercase">第三級<br>(A2)</span></label>
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="4"><span class="text-xs font-black text-slate-700 uppercase">第四級<br>(B1)</span></label>
-                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="5"><span class="text-xs font-black text-slate-700 uppercase">第五級<br>(B2)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition group shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="1" checked><span class="text-xs font-black text-slate-700 leading-tight uppercase">第一級<br>(Pre A1)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="2"><span class="text-xs font-black text-slate-700 leading-tight uppercase">第二級<br>(A1)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="3"><span class="text-xs font-black text-slate-700 leading-tight uppercase">第三級<br>(A2)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="4"><span class="text-xs font-black text-slate-700 leading-tight uppercase">第四級<br>(B1)</span></label>
+                    <label class="flex flex-col items-center p-5 border-2 border-slate-50 rounded-3xl hover:border-indigo-300 cursor-pointer bg-slate-50 transition shadow-sm"><input type="checkbox" class="level-checkbox w-6 h-6 text-indigo-600 mb-2" value="5"><span class="text-xs font-black text-slate-700 leading-tight uppercase">第五級<br>(B2)</span></label>
                 </div>
             </div>
 
-            <!-- Step 2: Topics -->
             <div class="mb-10">
                 <div class="flex justify-between items-end mb-4">
                     <h2 class="text-xs font-black text-indigo-400 uppercase tracking-widest">Step 2: Select Topics</h2>
-                    <div class="flex gap-4"><button onclick="toggleAllTopics(true)" class="text-xs font-bold text-indigo-600 hover:underline uppercase">All</button><button onclick="toggleAllTopics(false)" class="text-xs font-bold text-slate-400 hover:underline uppercase">Clear</button></div>
+                    <div class="flex gap-6"><button onclick="toggleAllTopics(true)" class="text-xs font-bold text-indigo-600 hover:underline uppercase">All</button><button onclick="toggleAllTopics(false)" class="text-xs font-bold text-slate-400 hover:underline uppercase">Clear</button></div>
                 </div>
-                <div id="topic-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 overflow-y-auto p-4 border-2 border-slate-50 rounded-[2.5rem] bg-slate-50/50 custom-scroll h-64 font-bold text-slate-600"></div>
+                <div id="topic-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 overflow-y-auto p-4 border-2 border-slate-50 rounded-[2.5rem] bg-slate-50/50 custom-scroll h-64 font-bold text-slate-600 shadow-inner"></div>
             </div>
 
-            <!-- Step 3: Modes -->
             <div class="border-t border-slate-100 pt-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-                <button onclick="startExercise('flashcard')" class="p-8 bg-white border-2 border-emerald-100 text-emerald-600 rounded-[2.5rem] hover:bg-emerald-500 hover:text-white transition shadow-md flex flex-col items-center group"><span class="text-5xl mb-2">🎴</span><span class="font-black text-xl leading-tight">隨機字卡<br><span class="text-[10px] uppercase font-bold opacity-60">Flashcards</span></span></button>
-                <button onclick="startExercise('practice')" class="p-8 bg-white border-2 border-orange-100 text-orange-600 rounded-[2.5rem] hover:bg-orange-500 hover:text-white transition shadow-md flex flex-col items-center text-center group"><span class="text-5xl mb-2">🔍</span><span class="font-black text-xl leading-tight">認字練習<br><span class="text-[10px] uppercase font-bold opacity-60">Character Recognition</span></span></button>
-                <button onclick="startExercise('game')" class="p-8 bg-white border-2 border-indigo-100 text-indigo-600 rounded-[2.5rem] hover:bg-indigo-500 hover:text-white transition shadow-md flex flex-col items-center text-center group"><span class="text-5xl mb-2">🧩</span><span class="font-black text-xl leading-tight">記憶遊戲<br><span class="text-[10px] uppercase font-bold opacity-60">Matching Game</span></span></button>
+                <button onclick="startExercise('flashcard')" class="p-8 bg-white border-2 border-emerald-100 text-emerald-600 rounded-[2.5rem] hover:bg-emerald-500 hover:text-white transition shadow-md flex flex-col items-center group"><span class="text-5xl mb-2">🎴</span><span class="font-black text-xl">隨機字卡</span><span class="text-[10px] uppercase font-bold opacity-60">Flashcards</span></button>
+                <button onclick="startExercise('practice')" class="p-8 bg-white border-2 border-orange-100 text-orange-600 rounded-[2.5rem] hover:bg-orange-500 hover:text-white transition shadow-md flex flex-col items-center text-center group"><span class="text-5xl mb-2">🔍</span><span class="font-black text-xl leading-tight">認字練習</span><span class="text-[10px] uppercase font-bold opacity-60">Character Recognition</span></button>
+                <button onclick="startExercise('game')" class="p-8 bg-white border-2 border-indigo-100 text-indigo-600 rounded-[2.5rem] hover:bg-indigo-500 hover:text-white transition shadow-md flex flex-col items-center text-center group"><span class="text-5xl mb-2">🧩</span><span class="font-black text-xl leading-tight uppercase">Matching Game</span></button>
                 
                 <div class="p-8 bg-rose-50 border-2 border-rose-100 rounded-[2.5rem] shadow-xl md:col-span-3 flex flex-col md:flex-row items-center justify-between gap-6 relative">
-                    <div class="flex items-center gap-4"><span class="text-5xl">🏆</span><div class="text-left font-black text-rose-600 text-2xl leading-none">考試模式<div class="text-[10px] text-rose-400 uppercase font-black mt-2 tracking-widest">Exam Mode with Final Report</div></div></div>
+                    <div class="flex items-center gap-4"><span class="text-5xl">🏆</span><div class="text-left font-black text-rose-600 text-2xl leading-none">考試模式<div class="text-[10px] text-rose-400 uppercase font-black mt-2 tracking-widest leading-none">Assessment with Meaning Review</div></div></div>
                     <div class="flex flex-col items-center gap-2">
                         <div class="flex gap-4"><input type="number" id="exam-count" value="10" min="1" class="w-24 p-4 bg-white border-2 border-rose-200 rounded-2xl text-center font-black text-2xl text-rose-600 outline-none"><button onclick="startExercise('exam')" class="px-12 py-4 bg-rose-500 text-white rounded-2xl font-black text-xl hover:bg-rose-600 transition shadow-lg uppercase tracking-widest">Start</button></div>
-                        <p class="text-[10px] text-rose-400 font-bold italic tracking-tighter">*Hint: You can choose the total number of questions above.</p>
+                        <p class="text-[10px] text-rose-400 font-bold italic">*Hint: You can choose the total number of questions above.</p>
                     </div>
                 </div>
             </div>
@@ -100,30 +102,30 @@
                         <span id="progress-text" class="font-black text-indigo-600 text-2xl tracking-tighter tabular-nums">0 / 0</span>
                         <span id="current-topic-label" class="text-[9px] text-slate-400 font-black uppercase tracking-widest mt-1 italic">Topic</span>
                     </div>
-                    <div id="game-countdown-wrapper" class="hidden flex items-center gap-3 bg-rose-50 border-2 border-rose-100 px-6 py-2 rounded-2xl">
+                    <div id="game-countdown-wrapper" class="hidden flex items-center gap-3 bg-rose-50 border-2 border-rose-100 px-6 py-2 rounded-2xl shadow-inner">
                         <svg class="w-5 h-5 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span id="game-timer-display" class="font-black text-2xl tabular-nums tracking-tighter text-rose-600">00:00</span>
                     </div>
-                    <button onclick="exitExercise()" class="bg-rose-50 text-rose-600 px-5 py-2 rounded-2xl font-black text-xs hover:bg-rose-600 hover:text-white transition border border-rose-100 uppercase tracking-tighter">✕ Exit</button>
+                    <button onclick="exitExercise()" class="bg-rose-50 text-rose-600 px-5 py-2 rounded-2xl font-black text-xs hover:bg-rose-600 hover:text-white transition border border-rose-100 uppercase tracking-tighter shadow-sm">✕ Exit</button>
                 </div>
             </div>
 
-            <!-- Quiz Sub-mode Setup -->
+            <!-- Quiz Selection UI -->
             <div id="quiz-mode-setup" class="hidden bg-white p-10 rounded-[3rem] shadow-2xl max-w-2xl mx-auto text-center animate-in fade-in duration-500">
-                <h2 class="text-3xl font-black mb-8 uppercase">認字練習 模式選擇</h2>
+                <h2 class="text-3xl font-black mb-8 uppercase tracking-tighter text-slate-800">認字練習模式</h2>
                 <div class="grid gap-6">
-                    <button onclick="launchQuiz('normal')" class="p-6 bg-slate-50 border-4 border-slate-100 rounded-3xl hover:border-indigo-400 transition-all text-left">
-                        <div class="font-black text-xl text-indigo-600 uppercase">1. 普通模式 (Normal)</div>
-                        <div class="text-xs text-slate-400 font-bold mt-1 tracking-widest">Practice with infinite questions until you exit.</div>
+                    <button onclick="launchQuiz('normal')" class="p-8 bg-emerald-50 border-4 border-emerald-100 rounded-[2.5rem] hover:border-emerald-500 transition-all text-left group">
+                        <div class="font-black text-2xl text-emerald-600 uppercase">1. 普通模式 (Normal)</div>
+                        <div class="text-xs text-emerald-400 font-bold mt-1 tracking-widest">Infinite questions. Best for relaxed practice.</div>
                     </button>
-                    <div class="p-8 bg-rose-50 border-4 border-rose-100 rounded-[2.5rem] text-left">
-                        <div class="font-black text-xl text-rose-600 uppercase">2. 遊戲模式 (Battle Game)</div>
-                        <div class="text-xs text-rose-400 font-bold mt-1 mb-4 uppercase">Attack the demon! Select number of questions:</div>
+                    <div class="p-10 bg-rose-50 border-4 border-rose-100 rounded-[2.5rem] text-left">
+                        <div class="font-black text-2xl text-rose-600 uppercase">2. 遊戲大戰 (Battle Game)</div>
+                        <div class="text-xs text-rose-400 font-bold mt-1 mb-6 uppercase">Correct answers damage the demon! Choose length:</div>
                         <div class="flex gap-4">
-                            <select id="battle-count" class="flex-1 p-3 bg-white border-2 border-rose-200 rounded-xl font-black text-rose-600 outline-none">
+                            <select id="battle-count-select" class="flex-1 p-3 bg-white border-2 border-rose-200 rounded-xl font-black text-xl text-rose-600 outline-none">
                                 <option value="5">5 Questions</option><option value="10" selected>10 Questions</option><option value="15">15 Questions</option><option value="20">20 Questions</option><option value="30">30 Questions</option><option value="50">50 Questions</option>
                             </select>
-                            <button onclick="launchQuiz('battle')" class="bg-rose-500 text-white px-8 rounded-xl font-black uppercase tracking-tighter">Start</button>
+                            <button onclick="launchQuiz('battle')" class="bg-rose-500 text-white px-10 rounded-xl font-black text-xl hover:bg-rose-600 transition shadow-lg">START</button>
                         </div>
                     </div>
                 </div>
@@ -132,320 +134,54 @@
             <!-- Battle HUD -->
             <div id="battle-ui" class="hidden max-w-4xl mx-auto grid grid-cols-2 gap-8 mb-6 animate-in slide-in-from-top duration-500">
                 <div class="bg-white p-4 rounded-3xl shadow-lg border-2 border-indigo-50 flex flex-col gap-2" id="player-unit">
-                    <div class="flex justify-between items-center px-2"><span class="text-3xl">👼</span><span class="font-black text-indigo-600 text-xs">ANGEL</span></div>
-                    <div class="w-full bg-slate-100 h-4 rounded-full overflow-hidden"><div id="player-hp" class="hp-bar h-full bg-indigo-500 w-full"></div></div>
+                    <div class="flex justify-between items-center px-2 font-black text-[10px] text-indigo-400 uppercase"><span>👼 Angel</span><span id="player-hp-val">100%</span></div>
+                    <div class="w-full bg-slate-100 h-4 rounded-full overflow-hidden border border-slate-50"><div id="player-hp" class="hp-bar h-full bg-indigo-500 w-full"></div></div>
                 </div>
                 <div class="bg-white p-4 rounded-3xl shadow-lg border-2 border-rose-50 flex flex-col gap-2" id="boss-unit">
-                    <div class="flex justify-between items-center px-2"><span class="font-black text-rose-600 text-xs">DEMON</span><span class="text-3xl">👿</span></div>
-                    <div class="w-full bg-slate-100 h-4 rounded-full overflow-hidden"><div id="boss-hp" class="hp-bar h-full bg-rose-500 w-full"></div></div>
+                    <div class="flex justify-between items-center px-2 font-black text-[10px] text-rose-400 uppercase"><span id="boss-hp-val">100%</span><span>Demon 👿</span></div>
+                    <div class="w-full bg-slate-100 h-4 rounded-full overflow-hidden border border-slate-50"><div id="boss-hp" class="hp-bar h-full bg-rose-500 w-full"></div></div>
                 </div>
             </div>
 
-            <!-- Main Interactive UI -->
-            <div id="flashcard-container" class="hidden flex flex-col items-center py-2">
-                <div class="w-full max-w-md h-80 cursor-pointer relative" onclick="flipCard()"><div id="card-inner" class="card-inner w-full h-full shadow-2xl rounded-[4rem] bg-white border-8 border-white"><div class="card-front flex items-center justify-center big-character bg-white rounded-[3.1rem] px-4 text-center"></div><div class="card-back flex flex-col items-center justify-center p-10 bg-indigo-600 text-white rounded-[3.1rem] text-center shadow-inner"><div id="card-pinyin-back" class="font-black mb-4 pinyin-font text-center leading-tight"></div><div class="w-24 h-1.5 bg-white/20 mb-6 rounded-full"></div><div id="card-english-back" class="font-bold text-indigo-50 min-h-[4rem] px-4 leading-snug italic text-2xl"></div><div id="card-topic-tag" class="text-[11px] mt-6 bg-white/20 text-white px-4 py-1.5 rounded-full font-black uppercase tracking-widest italic opacity-80"></div></div></div></div>
-                <div class="flex gap-8 mt-10"><button onclick="prevQuestion()" id="prev-btn" class="bg-white text-slate-400 w-16 h-16 rounded-full shadow-xl border flex items-center justify-center hover:text-indigo-600 transition active:scale-90"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 19l-7-7 7-7"></path></svg></button><button onclick="nextQuestion()" id="next-btn-main" class="bg-indigo-600 text-white px-16 py-5 rounded-[2.5rem] shadow-2xl shadow-indigo-200 hover:bg-indigo-700 transition font-black text-2xl uppercase tracking-tighter">Next →</button></div>
+            <!-- Flashcard UI -->
+            <div id="flashcard-container" class="hidden flex flex-col items-center py-2 animate-in zoom-in duration-300">
+                <div class="w-full max-w-md h-80 cursor-pointer relative" onclick="flipCard()">
+                    <div id="card-inner" class="card-inner w-full h-full shadow-2xl rounded-[4rem] bg-white border-8 border-white text-slate-800">
+                        <div class="card-front flex items-center justify-center big-character bg-white rounded-[3.1rem] px-4 text-center" id="flash-front-word"></div>
+                        <div class="card-back flex flex-col items-center justify-center p-10 bg-indigo-600 text-white rounded-[3.1rem] text-center shadow-inner">
+                            <div id="card-pinyin-back" class="font-black mb-4 pinyin-font text-center leading-tight"></div>
+                            <div class="w-24 h-1.5 bg-indigo-400/50 mb-6 rounded-full"></div>
+                            <div id="card-english-back" class="font-bold text-indigo-50 min-h-[4rem] px-4 leading-snug italic text-2xl"></div>
+                            <div id="card-topic-tag" class="text-[11px] mt-6 bg-white/20 text-white px-4 py-1.5 rounded-full font-black uppercase tracking-widest italic opacity-80"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex gap-8 mt-10">
+                    <button onclick="prevQuestion()" id="prev-btn" class="bg-white text-slate-400 w-16 h-16 rounded-full shadow-xl border flex items-center justify-center hover:text-indigo-600 transition transform active:scale-90"><svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M15 19l-7-7 7-7"></path></svg></button>
+                    <button onclick="nextQuestion()" id="next-btn-main" class="bg-indigo-600 text-white px-16 py-5 rounded-[2.5rem] shadow-2xl shadow-indigo-200 hover:bg-indigo-700 active:scale-95 transition-all font-black text-2xl uppercase tracking-tighter">Next →</button>
+                </div>
             </div>
 
-            <div id="quiz-container" class="hidden bg-white p-8 md:p-14 rounded-[4rem] shadow-2xl max-w-3xl mx-auto border border-white quiz-box">
-                <div id="quiz-question-text" class="text-center big-character mb-10 px-4"></div>
-                <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
-                <div id="quiz-feedback" class="mt-8 text-center h-10 font-black text-3xl transition-all"></div>
-                <div class="flex justify-center mt-6"><button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-indigo-600 text-white px-20 py-5 rounded-[2.5rem] shadow-xl hover:bg-indigo-700 font-black text-2xl uppercase tracking-tighter">NEXT →</button></div>
+            <!-- Quiz UI -->
+            <div id="quiz-container" class="hidden bg-white p-8 md:p-14 rounded-[4.5rem] shadow-2xl max-w-3xl mx-auto border border-white quiz-box">
+                <div id="quiz-question-text" class="text-center big-character mb-10 px-4">題目</div>
+                <div id="quiz-options" class="grid grid-cols-1 sm:grid-cols-2 gap-4 option-grid"></div>
+                <div id="quiz-feedback" class="mt-8 text-center h-10 font-black text-3xl transition-all min-h-[2.5rem]"></div>
+                <div class="flex justify-center mt-10"><button id="quiz-next-btn" onclick="nextQuestion()" class="hidden bg-indigo-600 text-white px-20 py-5 rounded-[2.5rem] shadow-xl hover:bg-indigo-700 font-black text-2xl uppercase tracking-tighter">NEXT →</button></div>
             </div>
 
+            <!-- Memory Game UI -->
             <div id="game-view" class="hidden">
                 <div id="game-setup-ui" class="bg-white p-10 rounded-[4rem] border border-white shadow-2xl max-w-2xl mx-auto text-center animate-in fade-in duration-500 mt-4">
-                    <h2 class="text-3xl font-black text-slate-800 mb-8 uppercase tracking-tighter leading-none">記憶遊戲 Matching</h2>
+                    <h2 class="text-3xl font-black text-slate-800 mb-8 uppercase tracking-tighter leading-none">Memory Settings</h2>
                     <div class="space-y-10 text-left mb-10">
-                        <div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-3 block tracking-widest">Match Mode</label><div class="grid grid-cols-2 gap-4 text-center font-black"><button onclick="setGameMode('pinyin', this)" class="mode-btn p-4 bg-white border-4 border-indigo-600 text-indigo-600 rounded-3xl transition-all">漢字 + Pinyin</button><button onclick="setGameMode('english', this)" class="mode-btn p-4 bg-white border-4 border-slate-100 text-slate-400 rounded-3xl transition-all">漢字 + English</button></div></div>
-                        <div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-3 block text-center tracking-widest">Card Count</label><div class="grid grid-cols-5 gap-2 font-black text-center"><button onclick="setGameCards(12, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">12</button><button onclick="setGameCards(16, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">16</button><button onclick="setGameCards(20, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">20</button><button onclick="setGameCards(24, this)" class="count-btn p-3 border-2 border-indigo-600 rounded-2xl transition bg-indigo-50 text-indigo-600 shadow-inner">24</button><button onclick="setGameCards(30, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">30</button></div></div>
-                        <div><label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-4 block leading-none flex items-center gap-2 tracking-widest">3. Countdown Timer</label><div class="flex gap-4 items-center bg-slate-50 p-6 rounded-[2.5rem] border-2 border-slate-100 font-black text-indigo-600 tracking-tighter"><input type="checkbox" id="timer-check" class="w-8 h-8 text-indigo-600 rounded-xl cursor-pointer"><div class="flex-1 flex gap-3"><select id="t-min" class="flex-1 p-3 bg-white border-2 border-slate-200 rounded-xl outline-none"><option value="0">0m</option><option value="1" selected>1m</option><option value="2">2m</option><option value="3">3m</option></select><select id="t-sec" class="flex-1 p-3 bg-white border-2 border-slate-200 rounded-xl outline-none"><option value="0">00s</option><option value="15">15s</option><option value="30">30s</option><option value="45">45s</option></select></div></div></div>
-                    </div>
-                    <button onclick="launchGame()" class="w-full bg-indigo-600 text-white py-6 rounded-[2.5rem] font-black text-3xl hover:bg-indigo-700 transition shadow-2xl uppercase tracking-widest">Start Game</button>
-                </div>
-                <div id="game-board-container" class="hidden animate-in zoom-in duration-500"><div id="game-board" class="grid mx-auto gap-2 md:gap-3 p-2"></div></div>
-            </div>
-        </section>
-
-        <!-- Final Report -->
-        <section id="report-section" class="hidden bg-white p-12 rounded-[4rem] shadow-2xl mt-4 border border-white max-w-5xl mx-auto text-center">
-            <h2 id="report-header" class="text-xs font-black text-slate-300 uppercase tracking-widest mb-4 font-serif italic">Performance Summary</h2>
-            <div id="score-summary" class="text-9xl font-black text-indigo-600 mb-10 tracking-tighter">Done!</div>
-            <div class="overflow-y-auto max-h-[50vh] border rounded-3xl custom-scroll mb-8 shadow-inner px-2">
-                <table class="w-full text-left bg-slate-50/30">
-                    <thead class="bg-indigo-600 text-white sticky top-0 font-bold text-sm uppercase">
-                        <tr><th class="p-4 rounded-tl-2xl">Word</th><th class="p-4">Pinyin</th><th class="p-4">Meaning</th><th class="p-4 rounded-tr-2xl text-center">Result</th></tr>
-                    </thead>
-                    <tbody id="report-tbody" class="divide-y divide-slate-100 text-slate-700 font-bold"></tbody>
-                </table>
-            </div>
-            <button onclick="exitExercise()" class="w-full bg-slate-900 text-white py-6 rounded-[2.5rem] font-black text-2xl hover:bg-indigo-600 transition shadow-2xl uppercase tracking-widest">Back to Home</button>
-        </section>
-    </div>
-
-    <script>
-        // --- 核心邏輯 ---
-        let vocabulary = []; let currentPool = []; let currentIndex = 0; let examResults = []; let gameSelectedWords = [];
-        let currentMode = ''; let quizSubMode = ''; let matchesFound = 0; let gameInterval = null; 
-        let gameModeSelection = 'pinyin'; let gameCardsCount = 24; let firstCard = null; let secondCard = null; let lockBoard = false;
-        let playerHP = 100; let bossHP = 100;
-
-        function applyScaling(text, element, type, target) {
-            const len = text.length;
-            if (type === 'word') {
-                if (target === 'game') {
-                    if (len <= 2) element.style.fontSize = "3rem";
-                    else if (len <= 4) element.style.fontSize = "1.8rem";
-                    else element.style.fontSize = "1rem";
-                } else {
-                    if (len <= 2) element.style.fontSize = "9rem";
-                    else if (len <= 4) element.style.fontSize = "5.5rem";
-                    else element.style.fontSize = "2.8rem";
-                }
-            } else {
-                if (target === 'game') {
-                    if (len <= 8) element.style.fontSize = "1.5rem";
-                    else if (len <= 15) element.style.fontSize = "0.9rem";
-                    else element.style.fontSize = "0.75rem";
-                } else {
-                    if (len <= 10) element.style.fontSize = "5.5rem";
-                    else if (len <= 20) element.style.fontSize = "3.2rem";
-                    else element.style.fontSize = "2.2rem";
-                }
-            }
-        }
-
-        // --- Data Handling ---
-        function toggleModal(show) { document.getElementById('settings-modal').classList.toggle('hidden', !show); if(show) { const s = localStorage.getItem('tocfl_wordbank'); if(s) document.getElementById('tsv-input').value = s; } }
-        function saveAndLoadData() { const input = document.getElementById('tsv-input').value; if(!input.trim()) return alert("Paste data!"); localStorage.setItem('tocfl_wordbank', input); parseData(input); toggleModal(false); exitExercise(); }
-
-        function parseData(raw) {
-            const lines = raw.trim().split(/\r?\n/).filter(l => l.trim() !== "");
-            if (lines.length < 2) return;
-            const headers = lines[0].toLowerCase().split(/\t/).map(h => h.trim());
-            const wIdx = headers.indexOf('word'), pIdx = headers.indexOf('pinyin'), lIdx = headers.indexOf('level'), sIdx = headers.indexOf('situation'), eIdx = headers.findIndex(h => h.includes('english') || h.includes('trans'));
-            vocabulary = lines.slice(1).map(line => {
-                const cols = line.split('\t');
-                let sit = (cols[sIdx === -1 ? 5 : sIdx] || "核心詞").trim();
-                if (sit.toLowerCase() === 'core' || sit === "核心詞") sit = "核心詞";
-                return { word: (cols[wIdx === -1 ? 1 : wIdx] || "").trim(), pinyin: (cols[pIdx === -1 ? 2 : pIdx] || "").trim(), level: (cols[lIdx === -1 ? 3 : lIdx] || "1").trim(), situation: sit, english: eIdx !== -1 ? (cols[eIdx] || "").trim() : "" };
-            }).filter(v => v.word && v.pinyin);
-            document.getElementById('data-count').textContent = `${vocabulary.length} Words Loaded`;
-            renderTopicList();
-        }
-
-        function renderTopicList() {
-            const container = document.getElementById('topic-container');
-            const uniqueSits = [...new Set(vocabulary.map(v => v.situation))].sort();
-            container.innerHTML = uniqueSits.map(s => `<label class="flex items-center space-x-3 p-4 border-2 border-white rounded-2xl hover:bg-white cursor-pointer transition bg-white/70 group shadow-sm"><input type="checkbox" class="topic-checkbox w-6 h-6 text-indigo-600 rounded" value="${s}" checked><span class="group-hover:text-indigo-600 font-bold text-sm text-slate-600 leading-tight">${topicDict[s] || s}</span></label>`).join("");
-        }
-
-        function toggleAllTopics(checked) { document.querySelectorAll('.topic-checkbox').forEach(cb => cb.checked = checked); }
-
-        // --- Modes ---
-        function startExercise(mode) {
-            const selectedLv = Array.from(document.querySelectorAll('.level-checkbox:checked')).map(cb => cb.value);
-            const selectedSit = Array.from(document.querySelectorAll('.topic-checkbox:checked')).map(cb => cb.value);
-            if(!vocabulary.length) return alert("Please ⚙️ Settings -> Paste Data!");
-            if(!selectedLv.length || !selectedSit.length) return alert("Select Level & Topic.");
-            currentPool = vocabulary.filter(v => selectedLv.includes(v.level.toString()) && selectedSit.includes(v.situation));
-            if (!currentPool.length) return alert("No words found.");
-
-            currentMode = mode; currentIndex = 0; examResults = []; matchesFound = 0;
-            resetTimer(); 
-            document.getElementById('setup-section').classList.add('hidden');
-            document.getElementById('exercise-section').classList.remove('hidden');
-            
-            ['game-view', 'flashcard-container', 'quiz-container', 'quiz-mode-setup', 'battle-ui'].forEach(id => document.getElementById(id).classList.add('hidden'));
-
-            if (mode === 'game') {
-                document.getElementById('game-view').classList.remove('hidden');
-                document.getElementById('game-setup-ui').classList.remove('hidden');
-            } else if (mode === 'practice') {
-                document.getElementById('quiz-mode-setup').classList.remove('hidden');
-            } else {
-                if (mode === 'exam') currentPool = [...currentPool].sort(()=>Math.random()-0.5).slice(0, parseInt(document.getElementById('exam-count').value));
-                renderCurrent();
-            }
-        }
-
-        function launchQuiz(subMode) {
-            quizSubMode = subMode;
-            document.getElementById('quiz-mode-setup').classList.add('hidden');
-            document.getElementById('quiz-container').classList.remove('hidden');
-            if(subMode === 'battle') {
-                const bCount = parseInt(document.getElementById('battle-count').value);
-                currentPool = [...currentPool].sort(()=>Math.random()-0.5).slice(0, bCount);
-                bossHP = 100; playerHP = 100; updateHP();
-                document.getElementById('battle-ui').classList.remove('hidden');
-            }
-            renderCurrent();
-        }
-
-        function updateHP() {
-            document.getElementById('boss-hp').style.width = `${bossHP}%`;
-            document.getElementById('player-hp').style.width = `${playerHP}%`;
-        }
-
-        // --- Standard Logic ---
-        function renderCurrent() {
-            const item = currentPool[currentIndex];
-            document.getElementById('progress-text').textContent = `${currentIndex + 1} / ${currentPool.length}`;
-            const flash = document.getElementById('flashcard-container'), quiz = document.getElementById('quiz-container'), feedback = document.getElementById('quiz-feedback');
-            flash.classList.add('hidden'); quiz.classList.add('hidden'); feedback.textContent = ""; 
-            document.getElementById('prev-btn').style.visibility = (currentIndex === 0) ? 'hidden' : 'visible';
-
-            if (currentMode === 'flashcard') {
-                flash.classList.remove('hidden'); document.getElementById('card-inner').classList.remove('flipped');
-                const front = document.querySelector('#flashcard-container .card-front'); front.textContent = item.word; applyScaling(item.word, front, 'word', 'main');
-                const bP = document.getElementById('card-pinyin-back'); bP.textContent = item.pinyin; applyScaling(item.pinyin, bP, 'pinyin', 'main');
-                document.getElementById('card-english-back').textContent = item.english || "";
-                document.getElementById('card-topic-tag').textContent = item.situation;
-                document.getElementById('current-topic-label').textContent = `Topic: ${item.situation}`;
-                document.getElementById('next-btn-main').textContent = (currentIndex === currentPool.length - 1) ? "REPORT" : "NEXT →";
-                document.getElementById('next-btn-main').classList.remove('hidden');
-            } else {
-                quiz.classList.remove('hidden'); document.getElementById('current-topic-label').textContent = `Topic: ${item.situation}`;
-                setupQuizMode(item);
-            }
-        }
-
-        function setupQuizMode(item) {
-            const q = document.getElementById('quiz-question-text'), o = document.getElementById('quiz-options');
-            q.textContent = item.word; applyScaling(item.word, q, 'word', 'main'); o.innerHTML = "";
-            document.getElementById('quiz-next-btn').classList.add('hidden');
-            const isTone = Math.random() > 0.5;
-            let opts = new Set([item.pinyin]);
-            if (isTone) {
-                let safety = 0; while(opts.size < 4 && safety < 100) { opts.add(generateToneVariation(item.pinyin)); safety++; }
-            } else {
-                let safety = 0; while(opts.size < 4 && safety < 100) { const r = vocabulary[Math.floor(Math.random()*vocabulary.length)].pinyin; if(r !== item.pinyin) opts.add(r); safety++; }
-            }
-            Array.from(opts).sort(()=>Math.random()-0.5).forEach(opt => {
-                const btn = document.createElement('button');
-                btn.className = "option-btn w-full p-5 border-4 border-slate-100 rounded-[2.5rem] hover:border-indigo-400 bg-slate-50 text-2xl font-black text-left px-10 transition-all pinyin-font";
-                btn.textContent = opt;
-                btn.onclick = () => {
-                    const isCorrect = (opt === item.pinyin);
-                    document.querySelectorAll('.option-btn').forEach(b => { b.disabled = true; if(b.textContent === item.pinyin) b.className = "w-full p-5 border-4 border-emerald-500 bg-emerald-50 rounded-[2.5rem] text-2xl font-black text-left px-10 mb-1 shadow-inner"; else if(b.textContent === opt) b.className = "w-full p-5 border-4 border-rose-500 bg-rose-50 rounded-[2.5rem] text-2xl font-black text-left px-10 mb-1 shadow-inner"; else b.style.opacity = "0.2"; });
-                    
-                    examResults.push({q: item.word, p: item.pinyin, e: item.english, u: opt, res: isCorrect});
-
-                    if (currentMode === 'practice' && quizSubMode === 'battle') {
-                        const dmg = 100 / currentPool.length;
-                        if (isCorrect) { bossHP -= dmg; document.getElementById('boss-unit').classList.add('hit-effect'); setTimeout(()=>document.getElementById('boss-unit').classList.remove('hit-effect'), 300); }
-                        else { playerHP -= dmg; document.getElementById('player-unit').classList.add('hit-effect'); setTimeout(()=>document.getElementById('player-unit').classList.remove('hit-effect'), 300); }
-                        updateHP(); setTimeout(nextQuestion, 700);
-                    } else if(currentMode === 'exam') { setTimeout(nextQuestion, 700); } 
-                    else if (currentMode === 'practice' && quizSubMode === 'normal') {
-                        if(isCorrect) setTimeout(nextQuestion, 700);
-                        else { document.getElementById('quiz-feedback').textContent = "✕ INCORRECT"; document.getElementById('quiz-feedback').className = "mt-8 text-center h-10 font-black text-3xl text-rose-500"; document.getElementById('quiz-next-btn').classList.remove('hidden'); }
-                    }
-                };
-                o.appendChild(btn);
-            });
-        }
-
-        // --- Robust Tone Generator ---
-        function generateToneVariation(p) {
-            const tones = {'a':['ā','á','ǎ','à'],'e':['ē','é','ě','è'],'i':['ī','í','ǐ','ì'],'o':['ō','ó','ǒ','ò'],'u':['ū','ú','ǔ','ù'],'ü':['ǖ','ǘ','ǚ','ǜ']};
-            const allToned = "āáǎàēéěèīíǐìōóǒòūúǔùǖǘǚǜ";
-            let c = [...p];
-            for(let i=0; i<c.length; i++) {
-                if(allToned.includes(c[i])) {
-                    for(let b in tones) { if(tones[b].includes(c[i])) { c[i] = tones[b][Math.floor(Math.random()*4)]; return c.join(""); } }
-                }
-            }
-            return p;
-        }
-
-        // --- Memory Game ---
-        function setGameMode(m, btn) { gameModeSelection = m; document.querySelectorAll('.mode-btn').forEach(b => b.className = "mode-btn p-4 bg-white border-4 border-slate-100 text-slate-400 rounded-3xl font-black transition-all"); btn.className = "mode-btn p-4 bg-white border-4 border-indigo-600 text-indigo-600 rounded-3xl font-black transition-all shadow-md"; }
-        function setGameCards(c, btn) { gameCardsCount = c; document.querySelectorAll('.count-btn').forEach(b => b.className = "count-btn p-3 border-2 border-slate-100 rounded-2xl font-black transition text-slate-500 bg-slate-50 text-center"); btn.className = "count-btn p-3 border-2 border-indigo-600 rounded-2xl font-black transition bg-indigo-50 text-indigo-600 text-center shadow-inner"; }
-
-        function launchGame() {
-            const pairs = gameCardsCount / 2;
-            gameSelectedWords = [...currentPool].sort(() => Math.random() - 0.5).slice(0, pairs);
-            let items = [];
-            gameSelectedWords.forEach((w, i) => {
-                items.push({ id: i, content: w.word, type: 'word' });
-                items.push({ id: i, content: (gameModeSelection === 'pinyin' ? w.pinyin : w.english || "?"), type: 'target' });
-            });
-            items.sort(() => Math.random() - 0.5);
-            document.getElementById('game-setup-ui').classList.add('hidden');
-            const board = document.getElementById('game-board');
-            document.getElementById('game-board-container').classList.remove('hidden');
-            board.innerHTML = "";
-            const colsMap = { 12: 'grid-cols-4', 16: 'grid-cols-4', 20: 'grid-cols-5', 24: 'grid-cols-6', 30: 'grid-cols-6' };
-            board.className = `grid ${colsMap[gameCardsCount]} gap-2 md:gap-3 mx-auto`;
-            items.forEach(item => {
-                const card = document.createElement('div');
-                card.className = "memory-card h-28 md:h-40";
-                const inner = document.createElement('div'); inner.className = "card-inner w-full h-full relative"; inner.dataset.id = item.id;
-                const front = document.createElement('div'); front.className = "card-front bg-indigo-500 border-4 border-white flex items-center justify-center text-white font-black text-3xl shadow-lg"; front.textContent = "?";
-                const back = document.createElement('div'); back.className = "card-back bg-white border-4 border-indigo-200 flex items-center justify-center p-2 text-center font-black text-slate-800 pinyin-font shadow-xl"; back.textContent = item.content;
-                applyScaling(item.content, back, item.type === 'word' ? 'word' : 'target', 'game');
-                inner.appendChild(front); inner.appendChild(back); card.appendChild(inner); card.onclick = () => flipMemoryCard(inner); board.appendChild(card);
-            });
-            if (document.getElementById('timer-check').checked) {
-                let totalSecs = (parseInt(document.getElementById('t-min').value) * 60) + parseInt(document.getElementById('t-sec').value);
-                const wrapper = document.getElementById('game-countdown-wrapper'), display = document.getElementById('game-timer-display');
-                wrapper.classList.remove('hidden');
-                gameInterval = setInterval(() => {
-                    display.textContent = `${Math.floor(totalSecs/60)}:${(totalSecs%60).toString().padStart(2,'0')}`;
-                    if(totalSecs <= 10) display.classList.add('timer-critical');
-                    if(totalSecs <= 0) { clearInterval(gameInterval); showGameReview(); }
-                    totalSecs--;
-                }, 1000);
-            }
-            document.getElementById('progress-text').textContent = `Matched: 0 / ${pairs}`;
-        }
-
-        function flipMemoryCard(card) {
-            if (lockBoard || card === firstCard || card.parentElement.classList.contains('matched')) return;
-            card.classList.add('flipped');
-            if (!firstCard) { firstCard = card; return; }
-            secondCard = card; lockBoard = true;
-            if (firstCard.dataset.id === secondCard.dataset.id) {
-                matchesFound++;
-                document.getElementById('progress-text').textContent = `Matched: ${matchesFound} / ${gameCardsCount/2}`;
-                setTimeout(() => {
-                    firstCard.parentElement.classList.add('matched'); secondCard.parentElement.classList.add('matched');
-                    [firstCard, secondCard, lockBoard] = [null, null, false];
-                    if (matchesFound === gameCardsCount/2) { clearInterval(gameInterval); showGameReview(); }
-                }, 500);
-            } else {
-                setTimeout(() => { firstCard.classList.remove('flipped'); secondCard.classList.remove('flipped'); [firstCard, secondCard, lockBoard] = [null, null, false]; }, 900);
-            }
-        }
-
-        // --- Helpers ---
-        function nextQuestion() { 
-            if (currentIndex < currentPool.length - 1) { currentIndex++; renderCurrent(); } 
-            else { if(currentMode === 'practice' && quizSubMode === 'normal') { currentIndex = 0; currentPool.sort(()=>Math.random()-0.5); renderCurrent(); } else { showReport(); } }
-        }
-        function prevQuestion() { if (currentIndex > 0) { currentIndex--; renderCurrent(); } }
-        function resetTimer() { clearInterval(gameInterval); document.getElementById('game-countdown-wrapper').classList.add('hidden'); document.getElementById('game-timer-display').classList.remove('timer-critical'); }
-        function exitExercise() { resetTimer(); document.getElementById('game-board').innerHTML = ""; document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.add('hidden'); document.getElementById('setup-section').classList.remove('hidden'); window.scrollTo(0,0); }
-        function flipCard() { document.getElementById('card-inner').classList.toggle('flipped'); }
-
-        function showReport() {
-            resetTimer(); document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.remove('hidden');
-            const validResults = examResults.filter(r => r.res);
-            const s = examResults.length ? Math.round(validResults.length / examResults.length * 100) : 100;
-            document.getElementById('score-summary').textContent = `${s}%`;
-            document.getElementById('report-tbody').innerHTML = examResults.map(r => `<tr><td class="p-5 text-4xl font-black">${r.q}</td><td class="p-5 text-emerald-500 font-bold pinyin-font text-xl">${r.p}</td><td class="p-5 italic text-slate-500 text-sm">${r.e}</td><td class="p-5 text-center text-3xl">${r.res?'✅':'❌'}</td></tr>`).join("");
-        }
-
-        function showGameReview() {
-            resetTimer(); document.getElementById('exercise-section').classList.add('hidden'); document.getElementById('report-section').classList.remove('hidden');
-            document.getElementById('score-summary').textContent = "REVIEW";
-            const data = (currentMode === 'game') ? gameSelectedWords : currentPool;
-            document.getElementById('report-tbody').innerHTML = data.map(r => `<tr><td class="p-5 text-4xl font-black">${r.word}</td><td class="p-5 text-emerald-500 font-bold pinyin-font text-xl">${r.pinyin}</td><td class="p-5 italic text-slate-500 text-sm">${r.english}</td><td class="p-5 text-center text-3xl">🎯</td></tr>`).join("");
-        }
-
-        window.onload = () => { const saved = localStorage.getItem('tocfl_wordbank'); if(saved) parseData(saved); };
-    </script>
-</body>
-</html>
+                        <div>
+                            <label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-3 block">Match Mode</label>
+                            <div class="grid grid-cols-2 gap-4 text-center font-black"><button onclick="setGameMode('pinyin', this)" class="mode-btn p-4 bg-white border-4 border-indigo-600 text-indigo-600 rounded-3xl transition-all shadow-sm">漢字 + Pinyin</button><button onclick="setGameMode('english', this)" class="mode-btn p-4 bg-white border-4 border-slate-100 text-slate-400 rounded-3xl transition-all shadow-sm">漢字 + English</button></div>
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-black text-indigo-400 uppercase tracking-widest mb-3 block text-center">Card Count</label>
+                            <div class="grid grid-cols-5 gap-2 font-black text-center"><button onclick="setGameCards(12, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">12</button><button onclick="setGameCards(16, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">16</button><button onclick="setGameCards(20, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">20</button><button onclick="setGameCards(24, this)" class="count-btn p-3 border-2 border-indigo-600 rounded-2xl transition bg-indigo-50 text-indigo-600 shadow-inner">24</button><button onclick="setGameCards(30, this)" class="count-btn p-3 border-2 border-slate-100 rounded-2xl transition bg-slate-50 text-slate-500">30</button></div>
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-black
